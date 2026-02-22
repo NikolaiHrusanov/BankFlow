@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusBank | Modern Digital Banking</title>
+   <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--- Floating Navigation --->
+    <nav class="floating-nav">
+        <div class="container">
+            <!-- Brand now lives inside the nav -->
+            <a href="index.html" class="nav-brand">
+                Nexus<span class="accent">Bank</span>
+            </a>
+
+            <!-- Navigation items -->
+            <div class="nav-row">
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#features" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Features</span>
+                </a>
+                <a href="#pricing" class="nav-item">
+                    <i class="fas fa-tag"></i>
+                    <span>Pricing</span>
+                </a>
+                
+                <div class="nav-spacer"></div>
+                
+                <a href="login.html" class="nav-item btn-ghost">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </a>
+                <a href="login.html" class="nav-item btn-primary">
+                    <span>Get Started</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                
+                <button class="theme-toggle nav-item" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        Bank-Level Security
+                    </span>
+                </div>
+                <h1 class="hero-title">
+                    Banking reimagined for the
+                    <span class="gradient-text">digital age</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Manage, invest, and grow your wealth with our intelligent banking platform.
+                    Zero fees. Maximum security. Beautiful design.
+                </p>
+                <div class="hero-actions">
+                    <a href="login.html" class="btn btn-primary btn-lg">
+                        <span>Open Free Account</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-lg">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Watch Demo</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">2M+</div>
+                        <div class="stat-label">Happy Users</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$50B+</div>
+                        <div class="stat-label">Assets Managed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="preview-card preview-card-1">
+                        <div class="preview-header">
+                            <div class="preview-title">Total Balance</div>
+                            <div class="preview-badge">Live</div>
+                        </div>
+                        <div class="preview-balance">$24,589.50</div>
+                        <div class="preview-trend">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5% this month</span>
+                        </div>
+                    </div>
+                    <div class="preview-card preview-card-2">
+                        <div class="preview-transaction">
+                            <div class="transaction-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <div class="transaction-name">Apple Store</div>
+                                <div class="transaction-time">Today • 2:45 PM</div>
+                            </div>
+                            <div class="transaction-amount negative">-$299.99</div>
+                        </div>
+                        <div class="preview-transaction">
+                            <div class="transaction-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <div class="transaction-name">Salary Deposit</div>
+                                <div class="transaction-time">Yesterday • 9:00 AM</div>
+                            </div>
+                            <div class="transaction-amount positive">+$4,500.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Features</div>
+                <h2 class="section-title">Everything you need in one place</h2>
+                <p class="section-subtitle">Designed for speed, built for security</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon bg-gradient-1">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Instant Transfers</h3>
+                    <p class="feature-description">
+                        Send money anywhere in seconds with zero fees. 24/7 availability.
+                    </p>
+                    <a href="transfer.html" class="feature-link">
+                        <span>Try it now</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon bg-gradient-2">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Analytics</h3>
+                    <p class="feature-description">
+                        AI-powered insights into your spending patterns and savings opportunities.
+                    </p>
+                    <a href="dashboard.html" class="feature-link">
+                        <span>View analytics</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon bg-gradient-3">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3 class="feature-title">Biometric Security</h3>
+                    <p class="feature-description">
+                        Face ID, Touch ID, and military-grade encryption for maximum security.
+                    </p>
+                    <a href="profile.html" class="feature-link">
+                        <span>Secure account</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to experience modern banking?</h2>
+                    <p class="cta-subtitle">
+                        Join thousands who've already transformed their financial life.
+                    </p>
+                    <a href="login.html" class="btn btn-cta btn-lg">
+                        <span>Start Free Trial</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="cta-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-preview">
+                                <div class="app-balance">$12,458.90</div>
+                                <div class="app-action">
+                                    <button class="app-btn">
+                                        <i class="fas fa-qrcode"></i>
+                                        Pay
+                                    </button>
+                                    <button class="app-btn">
+                                        <i class="fas fa-exchange-alt"></i>
+                                        Transfer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <p class="footer-tagline">
+                        Modern banking for the digital generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Product</h4>
+                        <a href="dashboard.html" class="footer-link">Dashboard</a>
+                        <a href="accounts.html" class="footer-link">Accounts</a>
+                        <a href="transfer.html" class="footer-link">Transfers</a>
+                        <a href="transactions.html" class="footer-link">Transactions</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Company</h4>
+                        <a href="#" class="footer-link">About</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Security</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Legal</h4>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2024 NexusBank. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navRow = document.querySelector('.nav-row');
+            
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navRow.classList.toggle('mobile-open');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!navRow.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navRow.classList.remove('mobile-open');
+                }
+            });
+            
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark-theme');
+                document.body.classList.toggle('dark-theme');
+                const icon = this.querySelector('i');
+                const isDark = document.documentElement.classList.contains('dark-theme');
+                icon.classList.toggle('fa-moon', !isDark);
+                icon.classList.toggle('fa-sun', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+                document.body.classList.add('dark-theme');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+    </script>
+</body>
+</html>

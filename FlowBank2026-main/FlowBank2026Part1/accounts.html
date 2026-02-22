@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts | NexusBank</title>
+   <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/accounts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+                </a>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar">JD</div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john@example.com</div>
+                </div>
+                <button class="theme-toggle" id="sidebarThemeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item active">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <span>Accounts</span>
+                    </a>
+                    <a href="transfer.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>Transfers</span>
+                    </a>
+                    <a href="transactions.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <span>Transactions</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Financial</div>
+                    <a href="investments.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span>Investments</span>
+                    </a>
+                    <a href="cards.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <span>Cards</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <span>Savings Goals</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn btn-ghost btn-block">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="header-title">
+                    <h1>Accounts</h1>
+                    <p>Manage your accounts and view balances</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Search accounts...">
+                    </div>
+                    
+                    <button class="btn btn-primary" id="newAccountBtn">
+                        <i class="fas fa-plus"></i>
+                        <span>New Account</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Total Balance -->
+            <section class="balance-overview">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Total Balance</div>
+                            <div class="card-subtitle">Across all accounts</div>
+                        </div>
+                        <div class="balance-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5% this month</span>
+                        </div>
+                    </div>
+                    <div class="total-balance">$42,589.75</div>
+                    <div class="balance-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Checking</span>
+                            <span class="breakdown-value">$18,245.75</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Savings</span>
+                            <span class="breakdown-value">$24,344.00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accounts Summary -->
+            <section class="accounts-summary">
+                <!-- Primary Checking Account -->
+                <div class="summary-card primary">
+                    <div class="summary-header">
+                        <div class="account-type">
+                            <div class="account-icon-large">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="account-meta">
+                                <h3>Primary Checking</h3>
+                                <p>•••• 4589 • Last updated: Today</p>
+                            </div>
+                        </div>
+                        <div class="account-actions">
+                            <button class="btn btn-ghost btn-sm">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="account-balance-large">$18,245.75</div>
+                    <div class="account-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+$1,245.50 this month</span>
+                    </div>
+                    
+                    <div class="account-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Available Balance</span>
+                            <span class="detail-value">$18,245.75</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Interest Rate</span>
+                            <span class="detail-value">0.5% APY</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Monthly Transactions</span>
+                            <span class="detail-value">42</span>
+                        </div>
+                    </div>
+                    
+                    <div class="account-actions">
+                        <a href="transfer.html" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Transfer</span>
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Details</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Savings Account -->
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <div class="account-type">
+                            <div class="account-icon-large">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="account-meta">
+                                <h3>High-Yield Savings</h3>
+                                <p>•••• 7892 • Last updated: Today</p>
+                            </div>
+                        </div>
+                        <div class="account-actions">
+                            <button class="btn btn-ghost btn-sm">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="account-balance-large">$24,344.00</div>
+                    <div class="account-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+$2,344.00 this month</span>
+                    </div>
+                    
+                    <div class="account-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Available Balance</span>
+                            <span class="detail-value">$24,344.00</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Interest Rate</span>
+                            <span class="detail-value">4.25% APY</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Monthly Growth</span>
+                            <span class="detail-value">+$86.45</span>
+                        </div>
+                    </div>
+                    
+                    <div class="account-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>Deposit</span>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Details</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Account -->
+            <section class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Investment Account</div>
+                        <div class="card-subtitle">Stocks & ETFs portfolio</div>
+                    </div>
+                    <a href="investments.html" class="btn btn-ghost btn-sm">
+                        <span>View Details</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="account-item">
+                    <div class="account-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="account-info">
+                        <div class="account-name">Investment Portfolio</div>
+                        <div class="account-number">Brokerage • •••• 3456</div>
+                    </div>
+                    <div class="account-balance">$58,421.30</div>
+                    <div class="account-change positive">+12.8%</div>
+                </div>
+            </section>
+
+            <!-- Recent Account Activity -->
+            <section class="recent-transactions">
+                <div class="transactions-header">
+                    <h2>Recent Account Activity</h2>
+                    <a href="transactions.html" class="btn btn-ghost btn-sm">
+                        <span>View All</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Salary Deposit</div>
+                            <div class="transaction-subtitle">Today • Checking • ACME Corp</div>
+                        </div>
+                        <div class="transaction-amount positive">+$4,500.00</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Transfer to Savings</div>
+                            <div class="transaction-subtitle">Yesterday • Internal Transfer</div>
+                        </div>
+                        <div class="transaction-amount negative">-$1,000.00</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Credit Card Payment</div>
+                            <div class="transaction-subtitle">Oct 12 • Checking to Visa</div>
+                        </div>
+                        <div class="transaction-amount negative">-$2,345.67</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- New Account Modal -->
+    <div class="modal" id="newAccountModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Open New Account</h2>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="accountForm">
+                <div class="form-group">
+                    <label class="form-label">Account Type</label>
+                    <div class="account-type-options">
+                        <label class="account-option">
+                            <input type="radio" name="accountType" value="checking" checked>
+                            <div class="option-content">
+                                <i class="fas fa-university"></i>
+                                <span>Checking Account</span>
+                                <small>Daily transactions, debit card</small>
+                            </div>
+                        </label>
+                        <label class="account-option">
+                            <input type="radio" name="accountType" value="savings">
+                            <div class="option-content">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span>Savings Account</span>
+                                <small>High interest, savings goals</small>
+                            </div>
+                        </label>
+                        <label class="account-option">
+                            <input type="radio" name="accountType" value="investment">
+                            <div class="option-content">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Investment Account</span>
+                                <small>Stocks, ETFs, mutual funds</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="accountName">Account Name</label>
+                    <input type="text" class="form-control" id="accountName" placeholder="e.g., Emergency Fund" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="initialDeposit">Initial Deposit</label>
+                    <div style="position: relative;">
+                        <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">$</span>
+                        <input type="number" class="form-control" id="initialDeposit" placeholder="0.00" min="0" step="0.01" style="padding-left: 30px;">
+                    </div>
+                    <small class="form-hint">Minimum $25 for checking, $100 for savings</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" required>
+                        <span class="checkbox-label">I agree to the terms and conditions</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span>Open Account</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            });
+            
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('sidebarThemeToggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const icon = themeToggle.querySelector('i');
+                if (document.body.classList.contains('dark-theme')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+                localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            });
+            
+            // Check saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            // New account modal
+            const newAccountBtn = document.getElementById('newAccountBtn');
+            const newAccountModal = document.getElementById('newAccountModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            newAccountBtn.addEventListener('click', () => {
+                newAccountModal.classList.add('active');
+            });
+            
+            closeModal.addEventListener('click', () => {
+                newAccountModal.classList.remove('active');
+            });
+            
+            newAccountModal.addEventListener('click', (e) => {
+                if (e.target === newAccountModal) {
+                    newAccountModal.classList.remove('active');
+                }
+            });
+            
+            // Account form submission
+            const accountForm = document.getElementById('accountForm');
+            accountForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const accountType = document.querySelector('input[name="accountType"]:checked').value;
+                const accountName = document.getElementById('accountName').value;
+                const initialDeposit = document.getElementById('initialDeposit').value;
+                
+                if (!accountName) {
+                    alert('Please enter an account name');
+                    return;
+                }
+                
+                // Simulate account creation
+                console.log('Creating new account:', {
+                    type: accountType,
+                    name: accountName,
+                    deposit: initialDeposit
+                });
+                
+                // Show success message
+                alert(`Successfully created ${accountName} account!`);
+                
+                // Close modal and reset form
+                newAccountModal.classList.remove('active');
+                accountForm.reset();
+            });
+        });
+    </script>
+    
+    <style>
+        .balance-overview {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .total-balance {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: var(--space-lg) 0;
+        }
+        
+        .balance-trend {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-weight: 500;
+        }
+        
+        .balance-trend.positive {
+            color: var(--success);
+        }
+        
+        .balance-breakdown {
+            display: flex;
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .breakdown-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .breakdown-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .breakdown-value {
+            font-weight: 600;
+        }
+        
+        .account-type-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+        }
+        
+        .account-option {
+            cursor: pointer;
+        }
+        
+        .account-option input {
+            display: none;
+        }
+        
+        .account-option input:checked + .option-content {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+        
+        .option-content {
+            background: var(--surface);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .option-content:hover {
+            border-color: var(--primary);
+        }
+        
+        .option-content i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: var(--space-md);
+            display: block;
+        }
+        
+        .option-content span {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .option-content small {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        .form-hint {
+            display: block;
+            margin-top: var(--space-xs);
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+    </style>
+    <script src="js/app.js"></script>
+</body>
+</html>

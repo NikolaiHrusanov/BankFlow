@@ -1,0 +1,929 @@
+/* Authentication Pages Styles (login.html) */
+
+body.auth-page {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* REMOVES PAGE SCROLLBAR */
+    background: var(--bg-primary);
+}
+
+/* Auth Container - Takes full viewport with no scroll */
+.auth-container {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Prevents container scroll */
+}
+
+/* Auth Background - DARKER VIBRANT COLORS (more intense) */
+.auth-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-gradient-1,
+.bg-gradient-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Much darker, richer gradients - increased opacity to 0.8 */
+.bg-gradient-1 {
+    background: radial-gradient(circle at 20% 50%, rgba(79, 70, 229, 0.8) 0%, transparent 70%);
+}
+
+.bg-gradient-2 {
+    background: radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+}
+
+/* Additional darker gradient layers - increased opacity */
+.auth-background::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at 30% 40%, rgba(6, 182, 212, 0.6) 0%, transparent 60%);
+    animation: rotate 30s linear infinite;
+}
+
+.auth-background::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.6) 0%, transparent 60%);
+    animation: rotateReverse 25s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* Left Panel - DARKER VIBRANT with NO BUTTONS */
+.auth-left {
+    flex: 1;
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, 
+        rgba(79, 70, 229, 0.7), 
+        rgba(139, 92, 246, 0.7),
+        rgba(6, 182, 212, 0.5)
+    );
+    backdrop-filter: blur(10px);
+    overflow-y: auto; /* Left panel scrolls independently if needed */
+}
+
+/* Left panel scrollbar - hidden but functional */
+.auth-left::-webkit-scrollbar {
+    width: 4px;
+}
+
+.auth-left::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.auth-left::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+}
+
+/* Brand section - CLEAN, NO BUTTONS */
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-sm) 0; /* Removed button-like background */
+    width: fit-content;
+}
+
+.auth-brand .brand-logo {
+    background: white;
+    color: var(--primary-dark);
+}
+
+.auth-brand .brand-accent {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hero section - CLEAN TEXT ONLY */
+.auth-hero {
+    flex: 0 0 auto;
+    margin-bottom: var(--space-2xl);
+}
+
+.auth-title {
+    font-size: 3.5rem;
+    margin-bottom: var(--space-md);
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-2xl);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Features - TEXT ONLY, NO BUTTONS */
+.auth-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+.auth-features .feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: white;
+    padding: var(--space-sm) 0; /* Removed button-like background */
+    transition: all var(--transition-fast);
+}
+
+.auth-features .feature:hover {
+    transform: translateX(5px); /* Subtle hover effect without button look */
+}
+
+.auth-features .feature i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.auth-features .feature span {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Testimonials - CLEAN TEXT CARDS (no buttons) */
+.auth-testimonials {
+    margin-bottom: var(--space-2xl);
+}
+
+.testimonial-title {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+    font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.testimonial-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    transition: all var(--transition-fast);
+}
+
+.testimonial-card:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transform: translateX(5px);
+}
+
+.testimonial-text {
+    color: white;
+    font-style: italic;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.author-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-name {
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.author-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+/* Stats - CLEAN, NO BUTTONS */
+.auth-stats {
+    display: flex;
+    gap: var(--space-2xl);
+    padding: var(--space-lg) 0; /* Removed background, just text */
+}
+
+.auth-stats .stat {
+    text-align: left;
+    flex: 1;
+}
+
+.auth-stats .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: var(--space-xs);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.auth-stats .stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Right Panel - SCROLLS INTERNALLY */
+.auth-right {
+    width: 500px;
+    height: 100vh; /* Full height */
+    background: var(--surface);
+    border-left: 1px solid var(--border-light);
+    padding: var(--space-2xl);
+    position: relative;
+    z-index: 1;
+    box-shadow: var(--shadow-xl);
+    overflow-y: auto; /* ONLY this scrolls - single scrollbar */
+}
+
+/* Custom Scrollbar for Auth Right */
+.auth-right::-webkit-scrollbar {
+    width: 6px;
+}
+
+.auth-right::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.auth-right::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: var(--radius-full);
+}
+
+.auth-right::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* ============================================
+   FIXED: EYE ICON ALIGNMENT
+   ============================================ */
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Left icon stays on left */
+.input-with-icon i:first-child {
+    position: absolute;
+    left: var(--space-md);
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Input field with proper padding */
+.input-with-icon .form-control {
+    width: 100%;
+    padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) * 2 + 1rem);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    transition: all var(--transition-fast);
+    line-height: 1.5;
+}
+
+/* FIXED: Eye icon container - properly centered */
+.input-action {
+    position: absolute;
+    right: var(--space-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    z-index: 3;
+}
+
+.input-action i {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-action:hover {
+    color: var(--primary);
+    background: var(--surface-hover);
+}
+
+/* Ensure the eye icon doesn't overlap with input text */
+.input-with-icon .form-control {
+    padding-right: calc(var(--space-md) * 2 + 1.5rem);
+}
+
+/* ============================================
+   REST OF YOUR STYLES (KEPT THE SAME)
+   ============================================ */
+
+/* Auth Card */
+.auth-card {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Auth Toggle */
+.auth-toggle {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xs);
+    background: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: var(--space-md);
+    background: none;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.toggle-btn.active {
+    background: var(--surface);
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Auth Forms */
+.auth-form {
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-header {
+    margin-bottom: var(--space-xl);
+}
+
+.auth-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Form Row (2 columns) */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.forgot-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Auth Divider */
+.auth-divider {
+    position: relative;
+    text-align: center;
+    margin: var(--space-xl) 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 70px);
+    height: 1px;
+    background: var(--border-light);
+}
+
+.auth-divider::before {
+    left: 0;
+}
+
+.auth-divider::after {
+    right: 0;
+}
+
+.auth-divider span {
+    background: var(--surface);
+    padding: 0 var(--space-md);
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+/* Social Login */
+.social-login {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.social-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Auth Footer */
+.auth-footer {
+    margin-top: var(--space-xl);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+.auth-footer .link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer .link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   SCROLL BUTTON STYLES - For Registration Form
+   ============================================ */
+
+/* Make registration form scrollable */
+#registerForm {
+    max-height: 550px;
+    overflow-y: auto;
+    padding-right: 12px;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Custom scrollbar for registration form */
+#registerForm::-webkit-scrollbar {
+    width: 4px;
+}
+
+#registerForm::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#registerForm::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: var(--radius-full);
+}
+
+#registerForm::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--border-light);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.1s ease;
+}
+
+/* Scroll Controls */
+.scroll-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+}
+
+.scroll-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.scroll-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Floating Scroll Button */
+.floating-scroll-btn {
+    position: sticky;
+    bottom: 10px;
+    left: 100%;
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    margin-left: auto;
+    z-index: 10;
+}
+
+.floating-scroll-btn.visible {
+    display: flex;
+}
+
+.floating-scroll-btn:hover {
+    background: var(--secondary);
+    transform: scale(1.1);
+}
+
+/* Password Strength */
+.password-strength {
+    height: 3px;
+    background: var(--border-light);
+    border-radius: var(--radius-full);
+    margin-top: var(--space-xs);
+    overflow: hidden;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all var(--transition-fast);
+}
+
+.strength-label {
+    font-size: 0.75rem;
+    margin-top: 2px;
+    color: var(--text-tertiary);
+}
+
+.password-requirements {
+    margin-top: var(--space-sm);
+    font-size: 0.75rem;
+}
+
+.req-item {
+    color: var(--text-tertiary);
+    margin-bottom: 2px;
+}
+
+.req-item.met {
+    color: var(--success);
+}
+
+/* File Upload */
+.file-upload {
+    position: relative;
+    border: 2px dashed var(--border-light);
+    border-radius: var(--radius-md);
+    background: var(--surface-elevated);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.file-upload:hover {
+    border-color: var(--primary);
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    color: var(--text-tertiary);
+}
+
+.file-upload-label i {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: var(--surface-elevated);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-xs);
+}
+
+.file-preview i {
+    color: var(--primary);
+}
+
+.file-preview .btn-remove {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: var(--space-xs);
+}
+
+.file-preview .btn-remove:hover {
+    color: var(--error);
+}
+
+/* Form Hints */
+.form-hint {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-xs);
+}
+
+.form-hint.error {
+    color: var(--error);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--space-md);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Dark theme adjustments */
+.dark-theme .auth-left {
+    background: linear-gradient(135deg, 
+        rgba(79, 70, 229, 0.8), 
+        rgba(139, 92, 246, 0.8),
+        rgba(6, 182, 212, 0.6)
+    );
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .auth-right {
+        width: 450px;
+    }
+    
+    .auth-title {
+        font-size: 2.5rem;
+    }
+    
+    .auth-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body.auth-page {
+        overflow-y: auto;
+    }
+    
+    .auth-container {
+        flex-direction: column;
+        height: auto;
+        overflow-y: visible;
+    }
+    
+    .auth-left {
+        display: none;
+    }
+    
+    .auth-right {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        border-left: none;
+    }
+    
+    .auth-card {
+        max-width: 100%;
+    }
+    
+    .social-login {
+        grid-template-columns: 1fr;
+    }
+    
+    #registerForm {
+        max-height: 500px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .scroll-controls {
+        justify-content: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

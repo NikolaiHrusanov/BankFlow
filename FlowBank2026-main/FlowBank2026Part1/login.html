@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Register | NexusBank</title>
+ <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           SCROLL BUTTON STYLES - For Registration Form
+           ============================================ */
+        
+        /* Make registration form scrollable */
+        #registerForm {
+            max-height: 650px;
+            overflow-y: auto;
+            padding-right: 12px;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* Custom scrollbar for registration form */
+        #registerForm::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #registerForm::-webkit-scrollbar-track {
+            background: var(--bg-tertiary, #2D2D2D);
+            border-radius: 10px;
+        }
+
+        #registerForm::-webkit-scrollbar-thumb {
+            background: var(--accent-primary, #6C5CE7);
+            border-radius: 10px;
+        }
+
+        #registerForm::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-secondary, #A463F5);
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress-container {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--bg-tertiary, #2D2D2D);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-primary, #6C5CE7), var(--accent-secondary, #A463F5));
+            transition: width 0.1s ease;
+        }
+
+        /* Scroll Controls - Top & Bottom Buttons */
+        .scroll-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin: 24px 0 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+        }
+
+        .scroll-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--bg-secondary, #1E1E1E);
+            border: 1px solid var(--border-color, #333);
+            border-radius: 12px;
+            color: var(--text-primary, #FFFFFF);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .scroll-btn i {
+            font-size: 14px;
+        }
+
+        .scroll-btn:hover {
+            background: var(--accent-primary, #6C5CE7);
+            border-color: var(--accent-primary, #6C5CE7);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+
+        /* Floating Scroll Button */
+        .floating-scroll-btn {
+            position: sticky;
+            bottom: 20px;
+            left: 100%;
+            width: 48px;
+            height: 48px;
+            background: var(--accent-primary, #6C5CE7);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(108, 92, 231, 0.4);
+            transition: all 0.3s ease;
+            margin-left: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            z-index: 100;
+        }
+
+        .floating-scroll-btn:hover {
+            background: var(--accent-secondary, #A463F5);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.5);
+        }
+
+        .floating-scroll-btn.visible {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quick Navigation Dots */
+        .scroll-nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color, #555);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-dot:hover {
+            background: var(--accent-primary, #6C5CE7);
+            transform: scale(1.3);
+        }
+
+        .nav-dot.active {
+            background: var(--accent-primary, #6C5CE7);
+            box-shadow: 0 0 0 2px var(--accent-primary, #6C5CE7);
+            transform: scale(1.2);
+        }
+
+        /* Hide nav dots on mobile */
+        @media (max-width: 768px) {
+            .scroll-nav-dots {
+                display: none;
+            }
+            
+            #registerForm {
+                max-height: 550px;
+            }
+        }
+
+        /* Animation for form sections */
+        .form-group, .form-row, .auth-header, .scroll-controls {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <!-- Background Elements -->
+    <div class="auth-background">
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="auth-container">
+        <!-- Left Panel - Brand & Info -->
+        <div class="auth-left">
+            <a href="index.html" class="auth-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+            </a>
+
+            <div class="auth-hero">
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to your account or create a new one</p>
+                
+                <div class="auth-features">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Bank-level security</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant transfers</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Smart analytics</span>
+                    </div>
+                </div>
+
+                <div class="auth-stats">
+                    <div class="stat">
+                        <div class="stat-number">2M+</div>
+                        <div class="stat-label">Users Trust Us</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Auth Forms -->
+        <div class="auth-right">
+            <div class="auth-card">
+                <!-- Auth Toggle -->
+                <div class="auth-toggle">
+                    <button class="toggle-btn active" id="showLoginBtn">Sign In</button>
+                    <button class="toggle-btn" id="showRegisterBtn">Register</button>
+                </div>
+
+                <!-- LOGIN FORM (Default visible) -->
+                <form class="auth-form" id="loginForm" style="display: block;">
+                    <div class="auth-header">
+                        <h2>Sign In</h2>
+                        <p>Enter your credentials to continue</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="loginEmail" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                            <button type="button" class="input-action toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkbox-label">Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="social-login">
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fas fa-fingerprint"></i>
+                            <span>Biometric</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM (Hidden by default) - WITH SCROLL BUTTONS -->
+                <form class="auth-form" id="registerForm" style="display: none;">
+                    <!-- Scroll Progress Bar -->
+                    <div class="scroll-progress-container">
+                        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+                    </div>
+
+                    <div class="auth-header">
+                        <h2>Create Account</h2>
+                        <p>Fill in your details to get started</p>
+                    </div>
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="regEmail" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="address" class="form-control" placeholder="123 Main St, City">
+                        </div>
+                    </div>
+
+                    <!-- Occupation & Phone (two columns) -->
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label class="form-label">Occupation</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-briefcase"></i>
+                                <input type="text" id="occupation" class="form-control" placeholder="Software Engineer">
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label class="form-label">Phone</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="phone" class="form-control" placeholder="+1 234 567 8900">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Age & Birth Year (two columns) -->
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label class="form-label">Age *</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="number" id="age" class="form-control" placeholder="25" min="18" max="120" required>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label class="form-label">Birth Year *</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                                <input type="number" id="birthYear" class="form-control" placeholder="2000" min="1900" max="2026" required>
+                            </div>
+                            <small class="form-hint" style="color: var(--text-tertiary); margin-top: 4px; display: block;">
+                                Age will be calculated automatically
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Age/Birth Year mismatch hint -->
+                    <div id="ageMismatchHint" class="form-hint error" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Age and birth year don't match
+                    </div>
+
+                    <!-- ID Type -->
+                    <div class="form-group">
+                        <label class="form-label">ID Type *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-id-card"></i>
+                            <select id="idType" class="form-control" required>
+                                <option value="" disabled selected>Select ID type</option>
+                                <option value="passport">Passport</option>
+                                <option value="driver">Driver License</option>
+                                <option value="national">National ID</option>
+                                <option value="student">Student ID</option>
+                                <option value="other">Other Government ID</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Upload ID Document -->
+                    <div class="form-group">
+                        <label class="form-label">Upload ID Document * (JPG, PNG, PDF)</label>
+                        <div class="file-upload">
+                            <input type="file" id="idDocument" accept=".jpg,.jpeg,.png,.pdf" required>
+                            <div class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Click to upload or drag and drop</span>
+                            </div>
+                        </div>
+                        <!-- File preview area -->
+                        <div id="filePreview" class="file-preview" style="display: none;">
+                            <i class="fas fa-file"></i>
+                            <span id="fileName"></span>
+                            <button type="button" id="removeFile" class="btn-remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="fileError" class="form-hint error" style="display: none;"></div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="form-label">Password *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regPassword" class="form-control" placeholder="••••••••" required>
+                            <button type="button" class="input-action toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <!-- Password strength bar -->
+                        <div class="password-strength">
+                            <div class="strength-bar" id="passwordStrengthBar"></div>
+                        </div>
+                        <!-- Password strength label -->
+                        <div class="strength-label" id="passwordStrengthLabel">Enter a password</div>
+                        
+                        <div class="password-requirements">
+                            <div id="reqLength" class="req-item">✗ At least 8 characters</div>
+                            <div id="reqUppercase" class="req-item">✗ One uppercase letter</div>
+                            <div id="reqLowercase" class="req-item">✗ One lowercase letter</div>
+                            <div id="reqNumber" class="req-item">✗ One number</div>
+                            <div id="reqSpecial" class="req-item">✗ One special character</div>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required>
+                            <button type="button" class="input-action toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="passwordMismatch" class="form-hint error" style="display: none;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Passwords do not match
+                        </div>
+                    </div>
+
+                    <!-- Global error container -->
+                    <div id="registerError" class="form-hint error" style="display: none; margin-bottom: var(--space-lg);"></div>
+
+                    <!-- ============================================
+                         SCROLL BUTTONS - Registration Form Navigation
+                         ============================================ -->
+                    
+                    <!-- Top & Bottom Navigation Buttons -->
+                    <div class="scroll-controls">
+                        <button type="button" class="scroll-btn" id="scrollToTopBtn">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Top</span>
+                        </button>
+                        <button type="button" class="scroll-btn" id="scrollToBottomBtn">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>Bottom</span>
+                        </button>
+                    </div>
+
+                    <!-- Floating Scroll to Top Button (appears when scrolling) -->
+                    <button type="button" class="floating-scroll-btn" id="floatingScrollBtn">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-block" disabled>
+                        <span>Create Account</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <div class="auth-footer">
+                        <p>By signing up, you agree to our <a href="#" class="link">Terms</a> and <a href="#" class="link">Privacy Policy</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation Dots (Optional Enhancement) -->
+    <div class="scroll-nav-dots" id="scrollNavDots" style="display: none;">
+        <div class="nav-dot active" data-section="top"></div>
+        <div class="nav-dot" data-section="personal"></div>
+        <div class="nav-dot" data-section="id"></div>
+        <div class="nav-dot" data-section="password"></div>
+        <div class="nav-dot" data-section="bottom"></div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="js/app.js"></script>
+    
+    <!-- Scroll Button JavaScript - Works alongside app.js -->
+    <script>
+        (function() {
+            'use strict';
+
+            // Wait for DOM to be ready
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                // ============================================
+                // SCROLL BUTTON FUNCTIONALITY
+                // ============================================
+                
+                const registerForm = document.getElementById('registerForm');
+                
+                // Only initialize if registerForm exists
+                if (!registerForm) return;
+
+                // Elements
+                const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+                const scrollToBottomBtn = document.getElementById('scrollToBottomBtn');
+                const floatingScrollBtn = document.getElementById('floatingScrollBtn');
+                const scrollProgressBar = document.getElementById('scrollProgressBar');
+                const showRegisterBtn = document.getElementById('showRegisterBtn');
+
+                // Initialize smooth scrolling
+                registerForm.style.scrollBehavior = 'smooth';
+
+                // ============================================
+                // SCROLL TO TOP BUTTON
+                // ============================================
+                if (scrollToTopBtn) {
+                    scrollToTopBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        registerForm.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+
+                // ============================================
+                // SCROLL TO BOTTOM BUTTON
+                // ============================================
+                if (scrollToBottomBtn) {
+                    scrollToBottomBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        registerForm.scrollTo({
+                            top: registerForm.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+
+                // ============================================
+                // FLOATING SCROLL BUTTON
+                // ============================================
+                if (floatingScrollBtn) {
+                    // Show/hide floating button based on scroll position
+                    registerForm.addEventListener('scroll', function() {
+                        const scrollThreshold = 200;
+                        if (registerForm.scrollTop > scrollThreshold) {
+                            floatingScrollBtn.classList.add('visible');
+                        } else {
+                            floatingScrollBtn.classList.remove('visible');
+                        }
+                        
+                        // Update scroll progress bar
+                        if (scrollProgressBar) {
+                            const scrollTop = registerForm.scrollTop;
+                            const scrollHeight = registerForm.scrollHeight - registerForm.clientHeight;
+                            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                            scrollProgressBar.style.width = progress + '%';
+                        }
+                    });
+
+                    // Scroll to top when floating button is clicked
+                    floatingScrollBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        registerForm.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+
+                // ============================================
+                // RESET SCROLL WHEN SWITCHING TO REGISTER FORM
+                // ============================================
+                if (showRegisterBtn) {
+                    showRegisterBtn.addEventListener('click', function() {
+                        // Small delay to ensure form is visible
+                        setTimeout(function() {
+                            if (registerForm) {
+                                registerForm.scrollTop = 0;
+                                // Reset progress bar
+                                if (scrollProgressBar) {
+                                    scrollProgressBar.style.width = '0%';
+                                }
+                                // Hide floating button
+                                if (floatingScrollBtn) {
+                                    floatingScrollBtn.classList.remove('visible');
+                                }
+                            }
+                        }, 50);
+                    });
+                }
+
+                // ============================================
+                // INITIAL PROGRESS BAR UPDATE
+                // ============================================
+                function updateProgressBar() {
+                    if (scrollProgressBar && registerForm) {
+                        const scrollTop = registerForm.scrollTop;
+                        const scrollHeight = registerForm.scrollHeight - registerForm.clientHeight;
+                        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                        scrollProgressBar.style.width = progress + '%';
+                    }
+                }
+
+                // Update progress bar on scroll and resize
+                registerForm.addEventListener('scroll', updateProgressBar);
+                window.addEventListener('resize', updateProgressBar);
+
+                // Initial update after a short delay
+                setTimeout(updateProgressBar, 100);
+
+                // ============================================
+                // KEYBOARD NAVIGATION
+                // ============================================
+                registerForm.addEventListener('keydown', function(e) {
+                    // Page Up / Page Down navigation
+                    if (e.key === 'PageUp') {
+                        e.preventDefault();
+                        registerForm.scrollBy({
+                            top: -400,
+                            behavior: 'smooth'
+                        });
+                    } else if (e.key === 'PageDown') {
+                        e.preventDefault();
+                        registerForm.scrollBy({
+                            top: 400,
+                            behavior: 'smooth'
+                        });
+                    } else if (e.key === 'Home' && e.ctrlKey) {
+                        e.preventDefault();
+                        registerForm.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else if (e.key === 'End' && e.ctrlKey) {
+                        e.preventDefault();
+                        registerForm.scrollTo({
+                            top: registerForm.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+
+                // ============================================
+                // ENHANCE FORM VALIDATION WITH SCROLL FEEDBACK
+                // ============================================
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const submitBtn = registerForm.querySelector('button[type="submit"]');
+                            if (submitBtn && !submitBtn.disabled) {
+                                // Form is valid - highlight the submit button
+                                submitBtn.classList.add('btn-pulse');
+                            } else if (submitBtn) {
+                                submitBtn.classList.remove('btn-pulse');
+                            }
+                        }
+                    });
+                });
+
+                const submitBtn = registerForm.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    observer.observe(submitBtn, { attributes: true });
+                }
+
+                console.log('Scroll buttons initialized successfully');
+            });
+        })();
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+/* Accounts Page Specific Styles */
+
+/* Balance Overview Section */
+.balance-overview {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-xl);
+}
+
+.balance-overview .card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+}
+
+.total-balance {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: var(--space-lg) 0;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.balance-trend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.balance-trend.positive {
+    color: var(--success);
+}
+
+.balance-trend.negative {
+    color: var(--error);
+}
+
+.balance-breakdown {
+    display: flex;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-light);
+}
+
+.breakdown-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.breakdown-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.breakdown-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Accounts Summary Section */
+.accounts-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    padding: 0 var(--space-xl) var(--space-xl);
+}
+
+.summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--transition-normal);
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.summary-card.primary {
+    border-left: 4px solid var(--primary);
+}
+
+.summary-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.account-type {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.account-icon-large {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.account-meta h3 {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+}
+
+.account-meta p {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.account-balance-large {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.account-change {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: var(--space-lg);
+}
+
+.account-change.positive {
+    color: var(--success);
+}
+
+.account-change.negative {
+    color: var(--error);
+}
+
+.account-details {
+    background: var(--surface-elevated);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.summary-card .account-actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.summary-card .account-actions .btn {
+    flex: 1;
+}
+
+/* Investment Account Section */
+.card .account-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.card .account-item:hover {
+    border-color: var(--primary);
+    transform: translateX(2px);
+}
+
+.card .account-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--surface-hover);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+.card .account-info {
+    flex: 1;
+}
+
+.card .account-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.card .account-number {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.card .account-balance {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-right: var(--space-md);
+}
+
+.card .account-change {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+/* Recent Account Activity */
+.recent-transactions {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin: 0 var(--space-xl) var(--space-xl);
+}
+
+.transactions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.transactions-header h2 {
+    font-size: 1.25rem;
+}
+
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--surface-hover);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+.transaction-info {
+    flex: 1;
+}
+
+.transaction-title {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.transaction-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.transaction-amount {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.transaction-amount.positive {
+    color: var(--success);
+}
+
+.transaction-amount.negative {
+    color: var(--error);
+}
+
+/* New Account Modal - Account Type Options */
+.account-type-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.account-option {
+    cursor: pointer;
+}
+
+.account-option input[type="radio"] {
+    display: none;
+}
+
+.option-content {
+    background: var(--surface-elevated);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-option input[type="radio"]:checked + .option-content {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.05);
+    box-shadow: var(--shadow-sm);
+}
+
+.option-content:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.option-content i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+}
+
+.option-content span {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+}
+
+.option-content small {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+}
+
+/* Form Hint */
+.form-hint {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Checkbox Style */
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .accounts-summary {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .account-type-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .balance-breakdown {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .balance-overview,
+    .accounts-summary,
+    .recent-transactions {
+        padding: 0 var(--space-md) var(--space-md);
+    }
+    
+    .total-balance {
+        font-size: 2.5rem;
+    }
+    
+    .summary-header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .account-type {
+        width: 100%;
+    }
+    
+    .summary-card .account-actions {
+        flex-direction: column;
+    }
+    
+    .account-type-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .card .account-item {
+        flex-wrap: wrap;
+    }
+    
+    .card .account-balance {
+        width: 100%;
+        margin: var(--space-xs) 0;
+    }
+    
+    .transaction-item {
+        flex-wrap: wrap;
+    }
+    
+    .transaction-amount {
+        width: 100%;
+        margin-left: calc(48px + var(--space-md));
+    }
+}
+
+/* Dark theme adjustments */
+.dark-theme .account-option input[type="radio"]:checked + .option-content {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.dark-theme .summary-card.primary {
+    border-left-color: var(--primary);
+}

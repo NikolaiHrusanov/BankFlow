@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions | NexusBank</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/transactions.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+                </a>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar">JD</div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john@example.com</div>
+                </div>
+                <button class="theme-toggle" id="sidebarThemeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <span>Accounts</span>
+                    </a>
+                    <a href="transfer.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>Transfers</span>
+                    </a>
+                    <a href="transactions.html" class="nav-item active">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <span>Transactions</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn btn-ghost btn-block">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="header-title">
+                    <h1>Transactions</h1>
+                    <p>View and manage all your transactions</p>
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="exportBtn">
+                        <i class="fas fa-download"></i>
+                        <span>Export</span>
+                    </button>
+                    <button class="btn btn-secondary" id="filterBtn">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Quick Stats -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Total Spent</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">$3,245.50</div>
+                    <div class="stat-card-change negative">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>This month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Transactions</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">142</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12 this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Avg. Transaction</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">$89.75</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>-5% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Top Category</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">Shopping</div>
+                    <div class="stat-card-change">
+                        <span>32% of spending</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="transactions-filters">
+                <div class="filters-header">
+                    <h2>Filter Transactions</h2>
+                    <button class="btn btn-ghost btn-sm" id="clearFiltersBtn">
+                        <i class="fas fa-times"></i>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Date Range</label>
+                        <select class="form-select" id="dateRange">
+                            <option value="all">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week" selected>This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Account</label>
+                        <select class="form-select" id="accountFilter">
+                            <option value="all">All Accounts</option>
+                            <option value="checking">Checking (•••• 4589)</option>
+                            <option value="savings">Savings (•••• 7892)</option>
+                            <option value="investment">Investment</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Category</label>
+                        <select class="form-select" id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="bills">Bills & Utilities</option>
+                            <option value="transfer">Transfers</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Type</label>
+                        <select class="form-select" id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="debit">Debit</option>
+                            <option value="credit">Credit</option>
+                            <option value="transfer">Transfer</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn-primary" id="applyFiltersBtn">
+                            <i class="fas fa-check"></i>
+                            <span>Apply Filters</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Table -->
+            <section class="transaction-table">
+                <!-- Table Header -->
+                <div class="table-header">
+                    <div class="header-cell">Description</div>
+                    <div class="header-cell">Category</div>
+                    <div class="header-cell">Account</div>
+                    <div class="header-cell">Date</div>
+                    <div class="header-cell">Amount</div>
+                    <div class="header-cell">Actions</div>
+                </div>
+
+                <!-- Table Rows -->
+                <div class="table-rows">
+                    <!-- Transaction 1 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">Amazon Purchase</div>
+                                <div class="transaction-subtitle">Order #123456789</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Shopping</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Today, 2:45 PM</div>
+                        <div class="transaction-amount negative">-$89.99</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Download Receipt">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 2 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">Salary Deposit</div>
+                                <div class="transaction-subtitle">ACME Corp • Direct Deposit</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Income</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Yesterday, 9:00 AM</div>
+                        <div class="transaction-amount positive">+$4,500.00</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 3 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">To Jane Smith</div>
+                                <div class="transaction-subtitle">Instant Transfer</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Transfer</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Oct 12, 3:30 PM</div>
+                        <div class="transaction-amount negative">-$250.00</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Repeat Transfer">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 4 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">Starbucks</div>
+                                <div class="transaction-subtitle">Coffee Purchase</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Food & Dining</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Oct 12, 8:30 AM</div>
+                        <div class="transaction-amount negative">-$5.75</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 5 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">Netflix Subscription</div>
+                                <div class="transaction-subtitle">Monthly Subscription</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Entertainment</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Oct 10, 12:00 PM</div>
+                        <div class="transaction-amount negative">-$15.99</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Manage Subscription">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 6 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">ACME Corp Payment</div>
+                                <div class="transaction-subtitle">Invoice #123</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Business</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Oct 9, 11:00 AM</div>
+                        <div class="transaction-amount negative">-$1,200.00</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Download Invoice">
+                                <i class="fas fa-file-invoice"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 7 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">To Savings Account</div>
+                                <div class="transaction-subtitle">Internal Transfer</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Transfer</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589 → •••• 7892</span>
+                        </div>
+                        <div class="transaction-date">Oct 8, 4:00 PM</div>
+                        <div class="transaction-amount negative">-$500.00</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Repeat Transfer">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction 8 -->
+                    <div class="table-row">
+                        <div class="transaction-detail">
+                            <div class="transaction-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div>
+                                <div class="transaction-title">Internet Bill</div>
+                                <div class="transaction-subtitle">Monthly Bill</div>
+                            </div>
+                        </div>
+                        <div class="transaction-category">Bills & Utilities</div>
+                        <div class="transaction-account">
+                            <span class="account-badge">•••• 4589</span>
+                        </div>
+                        <div class="transaction-date">Oct 8, 9:00 AM</div>
+                        <div class="transaction-amount negative">-$79.99</div>
+                        <div class="transaction-actions">
+                            <button class="action-btn" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Auto-pay Settings">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Pagination -->
+                <div class="table-pagination">
+                    <div class="pagination-info">
+                        Showing 1-8 of 142 transactions
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">4</button>
+                        <button class="page-btn">5</button>
+                        <button class="page-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Spending Insights -->
+            <section class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Spending Insights</div>
+                        <div class="card-subtitle">This month's spending by category</div>
+                    </div>
+                    <button class="btn btn-ghost btn-sm" id="insightsToggle">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>View Chart</span>
+                    </button>
+                </div>
+
+                <div class="category-list">
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-name">Shopping</div>
+                            <div class="category-percentage">32%</div>
+                        </div>
+                        <div class="category-bar">
+                            <div class="category-progress" style="width: 32%; background: var(--primary);"></div>
+                        </div>
+                        <div class="category-amount">$1,038.56</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-name">Food & Dining</div>
+                            <div class="category-percentage">24%</div>
+                        </div>
+                        <div class="category-bar">
+                            <div class="category-progress" style="width: 24%; background: var(--secondary);"></div>
+                        </div>
+                        <div class="category-amount">$778.92</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-name">Entertainment</div>
+                            <div class="category-percentage">18%</div>
+                        </div>
+                        <div class="category-bar">
+                            <div class="category-progress" style="width: 18%; background: var(--accent);"></div>
+                        </div>
+                        <div class="category-amount">$584.19</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-name">Bills & Utilities</div>
+                            <div class="category-percentage">15%</div>
+                        </div>
+                        <div class="category-bar">
+                            <div class="category-progress" style="width: 15%; background: var(--warning);"></div>
+                        </div>
+                        <div class="category-amount">$486.83</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-name">Other</div>
+                            <div class="category-percentage">11%</div>
+                        </div>
+                        <div class="category-bar">
+                            <div class="category-progress" style="width: 11%; background: var(--text-tertiary);"></div>
+                        </div>
+                        <div class="category-amount">$356.00</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div class="modal" id="transactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Transaction Details</h2>
+                <button class="modal-close" id="closeTransactionModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="transaction-details">
+                <div class="detail-header">
+                    <div class="detail-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h3 id="detailTitle">Amazon Purchase</h3>
+                        <p id="detailSubtitle">Order #123456789</p>
+                    </div>
+                    <div class="detail-amount negative" id="detailAmount">-$89.99</div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>Transaction Information</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Date & Time</span>
+                            <span class="detail-value" id="detailDateTime">Today, 2:45 PM</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status</span>
+                            <span class="detail-value status-completed">Completed</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Transaction ID</span>
+                            <span class="detail-value" id="detailID">TX-789456123</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Category</span>
+                            <span class="detail-value" id="detailCategory">Shopping</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Account</span>
+                            <span class="detail-value" id="detailAccount">•••• 4589</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Merchant</span>
+                            <span class="detail-value" id="detailMerchant">Amazon.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value" id="detailLocation">Online • Seattle, WA</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>Additional Notes</h4>
+                    <textarea class="form-control" id="transactionNotes" placeholder="Add notes about this transaction..." rows="3"></textarea>
+                </div>
+                
+                <div class="detail-actions">
+                    <button class="btn btn-secondary" id="downloadReceiptBtn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Receipt</span>
+                    </button>
+                    <button class="btn btn-secondary" id="reportIssueBtn">
+                        <i class="fas fa-flag"></i>
+                        <span>Report Issue</span>
+                    </button>
+                    <button class="btn btn-primary" id="saveNotesBtn">
+                        <i class="fas fa-save"></i>
+                        <span>Save Notes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            });
+            
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('sidebarThemeToggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const icon = themeToggle.querySelector('i');
+                if (document.body.classList.contains('dark-theme')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+                localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            });
+            
+            // Check saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            // Filter functionality
+            const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+            const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+            
+            applyFiltersBtn.addEventListener('click', () => {
+                const dateRange = document.getElementById('dateRange').value;
+                const account = document.getElementById('accountFilter').value;
+                const category = document.getElementById('categoryFilter').value;
+                const type = document.getElementById('typeFilter').value;
+                
+                console.log('Applying filters:', { dateRange, account, category, type });
+                alert('Filters applied!');
+            });
+            
+            clearFiltersBtn.addEventListener('click', () => {
+                document.getElementById('dateRange').value = 'week';
+                document.getElementById('accountFilter').value = 'all';
+                document.getElementById('categoryFilter').value = 'all';
+                document.getElementById('typeFilter').value = 'all';
+                alert('Filters cleared!');
+            });
+            
+            // Export functionality
+            document.getElementById('exportBtn').addEventListener('click', () => {
+                alert('Exporting transactions to CSV...');
+            });
+            
+            // Transaction details modal
+            const transactionModal = document.getElementById('transactionModal');
+            const closeTransactionModal = document.getElementById('closeTransactionModal');
+            const viewButtons = document.querySelectorAll('.action-btn .fa-eye').forEach(icon => {
+                icon.closest('.action-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    const row = icon.closest('.table-row');
+                    const title = row.querySelector('.transaction-title').textContent;
+                    const subtitle = row.querySelector('.transaction-subtitle').textContent;
+                    const amount = row.querySelector('.transaction-amount').textContent;
+                    const category = row.querySelector('.transaction-category').textContent;
+                    const account = row.querySelector('.account-badge').textContent;
+                    const date = row.querySelector('.transaction-date').textContent;
+                    
+                    // Populate modal
+                    document.getElementById('detailTitle').textContent = title;
+                    document.getElementById('detailSubtitle').textContent = subtitle;
+                    document.getElementById('detailAmount').textContent = amount;
+                    document.getElementById('detailAmount').className = `detail-amount ${amount.startsWith('+') ? 'positive' : 'negative'}`;
+                    document.getElementById('detailCategory').textContent = category;
+                    document.getElementById('detailAccount').textContent = account;
+                    document.getElementById('detailDateTime').textContent = date;
+                    
+                    // Generate random transaction ID
+                    document.getElementById('detailID').textContent = `TX-${Math.floor(Math.random() * 1000000000)}`;
+                    
+                    transactionModal.classList.add('active');
+                });
+            });
+            
+            closeTransactionModal.addEventListener('click', () => {
+                transactionModal.classList.remove('active');
+            });
+            
+            transactionModal.addEventListener('click', (e) => {
+                if (e.target === transactionModal) {
+                    transactionModal.classList.remove('active');
+                }
+            });
+            
+            // Pagination
+            const pageButtons = document.querySelectorAll('.page-btn:not([disabled])');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    pageButtons.forEach(btn => btn.classList.remove('active'));
+                    if (!button.querySelector('i')) {
+                        button.classList.add('active');
+                    }
+                });
+            });
+            
+            // Insights toggle
+            document.getElementById('insightsToggle').addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const text = this.querySelector('span');
+                
+                if (icon.classList.contains('fa-chart-pie')) {
+                    icon.classList.remove('fa-chart-pie');
+                    icon.classList.add('fa-list');
+                    text.textContent = 'View List';
+                } else {
+                    icon.classList.remove('fa-list');
+                    icon.classList.add('fa-chart-pie');
+                    text.textContent = 'View Chart';
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .transaction-table {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+            padding: var(--space-lg) var(--space-xl);
+            background: var(--surface-elevated);
+            border-bottom: 1px solid var(--border-light);
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .table-rows {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid var(--border-light);
+            align-items: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .table-row:hover {
+            background: var(--surface-hover);
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-detail {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-hover);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+        
+        .transaction-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .transaction-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .transaction-category {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--surface-hover);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .account-badge {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--surface-hover);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-family: monospace;
+        }
+        
+        .transaction-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .transaction-amount.positive {
+            color: var(--success);
+        }
+        
+        .transaction-amount.negative {
+            color: var(--error);
+        }
+        
+        .transaction-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            background: var(--surface);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .transaction-details {
+            padding: var(--space-xl);
+        }
+        
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .detail-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--surface-hover);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .detail-info {
+            flex: 1;
+        }
+        
+        .detail-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .detail-info p {
+            color: var(--text-secondary);
+        }
+        
+        .detail-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .detail-amount.positive {
+            color: var(--success);
+        }
+        
+        .detail-amount.negative {
+            color: var(--error);
+        }
+        
+        .detail-section {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .detail-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .detail-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .detail-value {
+            font-weight: 500;
+        }
+        
+        .detail-actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+        
+        .category-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .category-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-amount {
+            font-weight: 500;
+            text-align: right;
+        }
+    </style>
+    <script src="js/app.js"></script>
+</body>
+</html>
