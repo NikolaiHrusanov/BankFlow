@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | NexusBank</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+                </a>
+            </div>
+
+            <!-- User Info - Dynamic from auth -->
+            <div class="sidebar-user">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <div class="user-info">
+                    <div class="user-name" id="userName">Loading...</div>
+                    <div class="user-email" id="userEmail">Loading...</div>
+                </div>
+                <button class="theme-toggle" id="sidebarThemeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item active">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <span>Accounts</span>
+                    </a>
+                    <a href="transfer.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>Transfers</span>
+                        <span class="nav-item-badge">3</span>
+                    </a>
+                    <a href="transactions.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <span>Transactions</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Financial</div>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span>Investments</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <span>Cards</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <span>Savings Goals</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Settings</div>
+                    <a href="profile.html" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <span>Security</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Sidebar Footer with Logout Button -->
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-ghost btn-block" style="justify-content: center;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="header-title">
+                    <h1>Dashboard</h1>
+                    <p id="welcomeMessage">Welcome back! Here's your financial overview.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Search transactions, accounts...">
+                    </div>
+                    
+                    <button class="btn btn-secondary" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <button class="btn btn-primary" id="quickTransferBtn">
+                        <i class="fas fa-plus"></i>
+                        <span>Quick Transfer</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Overview - Dynamic -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Total Balance</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value" id="totalBalance">$42,589.75</div>
+                    <div class="stat-card-change positive" id="balanceChange">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12.5% this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Income</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value" id="incomeAmount">$8,450.00</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+5.2% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Expenses</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value" id="expensesAmount">$3,245.50</div>
+                    <div class="stat-card-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>-2.1% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Savings Rate</div>
+                        <div class="stat-card-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value" id="savingsRate">28%</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>On track for goal</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Left Column - Main Content -->
+                <div class="dashboard-main">
+                    <!-- Quick Actions -->
+                    <section class="quick-actions">
+                        <div class="section-title">
+                            <h2>Quick Actions</h2>
+                            <a href="#" class="btn btn-ghost btn-sm">
+                                <span>View All</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <div class="actions-grid">
+                            <a href="transfer.html" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-paper-plane"></i>
+                                </div>
+                                <div class="action-card-title">Send Money</div>
+                            </a>
+
+                            <a href="#" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="action-card-title">Pay with QR</div>
+                            </a>
+
+                            <a href="#" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="action-card-title">Add Card</div>
+                            </a>
+
+                            <a href="#" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div class="action-card-title">Budget Plan</div>
+                            </a>
+
+                            <a href="#" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <div class="action-card-title">Pay Bills</div>
+                            </a>
+
+                            <a href="#" class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="action-card-title">Add to Savings</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Recent Transactions -->
+                    <section class="recent-transactions">
+                        <div class="transactions-header">
+                            <h2>Recent Transactions</h2>
+                            <a href="transactions.html" class="btn btn-ghost btn-sm">
+                                <span>View All</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <div class="transaction-list" id="transactionList">
+                            <!-- Transactions will be dynamically loaded by app.js -->
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">Amazon Purchase</div>
+                                    <div class="transaction-subtitle">Today • 2:45 PM • Online Shopping</div>
+                                </div>
+                                <div class="transaction-amount negative">-$89.99</div>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">Salary Deposit</div>
+                                    <div class="transaction-subtitle">Yesterday • 9:00 AM • ACME Corp</div>
+                                </div>
+                                <div class="transaction-amount positive">+$4,500.00</div>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">Starbucks</div>
+                                    <div class="transaction-subtitle">Oct 12 • 8:30 AM • Food & Drinks</div>
+                                </div>
+                                <div class="transaction-amount negative">-$5.75</div>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">Netflix Subscription</div>
+                                    <div class="transaction-subtitle">Oct 10 • Monthly Subscription</div>
+                                </div>
+                                <div class="transaction-amount negative">-$15.99</div>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">Internet Bill</div>
+                                    <div class="transaction-subtitle">Oct 8 • Monthly Bill</div>
+                                </div>
+                                <div class="transaction-amount negative">-$79.99</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="dashboard-sidebar">
+                    <!-- Accounts Overview -->
+                    <section class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Your Accounts</div>
+                                <div class="card-subtitle" id="accountCount">2 active accounts</div>
+                            </div>
+                            <a href="accounts.html" class="btn btn-ghost btn-sm">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+
+                        <div class="account-list" id="accountList">
+                            <div class="account-item">
+                                <div class="account-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">Primary Checking</div>
+                                    <div class="account-number">•••• 4589</div>
+                                </div>
+                                <div class="account-balance">$18,245.75</div>
+                            </div>
+
+                            <div class="account-item">
+                                <div class="account-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">Savings Account</div>
+                                    <div class="account-number">•••• 7892</div>
+                                </div>
+                                <div class="account-balance">$24,344.00</div>
+                            </div>
+                        </div>
+
+                        <!-- Spending Categories -->
+                        <div style="margin-top: var(--space-xl);">
+                            <div class="card-subtitle" style="margin-bottom: var(--space-md);">Spending This Month</div>
+                            <div class="category-list">
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-name">Shopping</div>
+                                        <div class="category-percentage">32%</div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-progress" style="width: 32%; background: var(--primary);"></div>
+                                    </div>
+                                </div>
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-name">Food & Dining</div>
+                                        <div class="category-percentage">24%</div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-progress" style="width: 24%; background: var(--secondary);"></div>
+                                    </div>
+                                </div>
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-name">Entertainment</div>
+                                        <div class="category-percentage">18%</div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-progress" style="width: 18%; background: var(--accent);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Upcoming Bills -->
+                    <section class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Upcoming Bills</div>
+                                <div class="card-subtitle">Due in next 7 days</div>
+                            </div>
+                            <a href="#" class="btn btn-ghost btn-sm">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+
+                        <div class="upcoming-list">
+                            <div class="upcoming-item">
+                                <div class="upcoming-icon">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <div class="upcoming-info">
+                                    <div class="upcoming-title">Internet Bill</div>
+                                    <div class="upcoming-date">Due Tomorrow</div>
+                                </div>
+                                <div class="upcoming-amount">$79.99</div>
+                            </div>
+                            <div class="upcoming-item">
+                                <div class="upcoming-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="upcoming-info">
+                                    <div class="upcoming-title">Phone Bill</div>
+                                    <div class="upcoming-date">Due in 3 days</div>
+                                </div>
+                                <div class="upcoming-amount">$45.50</div>
+                            </div>
+                            <div class="upcoming-item">
+                                <div class="upcoming-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="upcoming-info">
+                                    <div class="upcoming-title">Electricity</div>
+                                    <div class="upcoming-date">Due in 5 days</div>
+                                </div>
+                                <div class="upcoming-amount">$120.75</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Quick Transfer Modal -->
+    <div class="modal" id="quickTransferModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Quick Transfer</h2>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="transferForm">
+                <div class="form-group">
+                    <label class="form-label" for="transferTo">Transfer To</label>
+                    <select class="form-select" id="transferTo" required>
+                        <option value="">Select recipient</option>
+                        <option value="john">John Smith • •••• 1234</option>
+                        <option value="jane">Jane Doe • •••• 5678</option>
+                        <option value="acme">ACME Corp • •••• 9012</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="transferAmount">Amount</label>
+                    <div style="position: relative;">
+                        <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);">$</span>
+                        <input type="number" class="form-control" id="transferAmount" placeholder="0.00" step="0.01" min="1" style="padding-left: 30px;" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="transferNote">Note (Optional)</label>
+                    <input type="text" class="form-control" id="transferNote" placeholder="Dinner, Rent, etc.">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span>Send Money</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // ============================================
+        // DASHBOARD - DYNAMIC USER DATA & FUNCTIONALITY
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // ----- LOAD CURRENT USER -----
+            function loadCurrentUser() {
+                // Check both localStorage and sessionStorage
+                const userData = JSON.parse(localStorage.getItem('nexusbank_current_user')) || 
+                                JSON.parse(sessionStorage.getItem('nexusbank_current_user'));
+                
+                if (!userData) {
+                    // No user logged in, redirect to login
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                // Update UI with user data
+                document.getElementById('userName').textContent = userData.name || 'User';
+                document.getElementById('userEmail').textContent = userData.email || '';
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${userData.name.split(' ')[0]}! Here's your financial overview.`;
+                
+                // Generate avatar initials
+                const initials = userData.name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()
+                    .substring(0, 2);
+                document.getElementById('userAvatar').textContent = initials;
+                
+                return userData;
+            }
+
+            // ----- LOGOUT FUNCTIONALITY -----
+            function initLogout() {
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Clear all session data
+                        localStorage.removeItem('nexusbank_current_user');
+                        sessionStorage.removeItem('nexusbank_current_user');
+                        
+                        // Show logout toast
+                        showToast('Logged out successfully', 'success');
+                        
+                        // Redirect to login after delay
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 1000);
+                    });
+                }
+            }
+
+            // ----- TOAST NOTIFICATION -----
+            window.showToast = function(message, type = 'info') {
+                const toastContainer = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                toastContainer.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideIn 0.3s ease reverse forwards';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+            };
+
+            // ----- MOBILE MENU -----
+            function initMobileMenu() {
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebarOverlay');
+                
+                if (mobileMenuBtn && sidebar && sidebarOverlay) {
+                    mobileMenuBtn.addEventListener('click', () => {
+                        sidebar.classList.add('active');
+                        sidebarOverlay.classList.add('active');
+                    });
+                    
+                    sidebarOverlay.addEventListener('click', () => {
+                        sidebar.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                    });
+                }
+            }
+
+            // ----- THEME TOGGLE -----
+            function initThemeToggle() {
+                const themeToggle = document.getElementById('sidebarThemeToggle');
+                
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-theme');
+                    if (themeToggle) {
+                        const icon = themeToggle.querySelector('i');
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                }
+                
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => {
+                        document.body.classList.toggle('dark-theme');
+                        const icon = themeToggle.querySelector('i');
+                        if (document.body.classList.contains('dark-theme')) {
+                            icon.classList.remove('fa-moon');
+                            icon.classList.add('fa-sun');
+                            localStorage.setItem('theme', 'dark');
+                        } else {
+                            icon.classList.remove('fa-sun');
+                            icon.classList.add('fa-moon');
+                            localStorage.setItem('theme', 'light');
+                        }
+                    });
+                }
+            }
+
+            // ----- QUICK TRANSFER MODAL -----
+            function initQuickTransfer() {
+                const quickTransferBtn = document.getElementById('quickTransferBtn');
+                const quickTransferModal = document.getElementById('quickTransferModal');
+                const closeModal = document.getElementById('closeModal');
+                const transferForm = document.getElementById('transferForm');
+                
+                if (quickTransferBtn && quickTransferModal) {
+                    quickTransferBtn.addEventListener('click', () => {
+                        quickTransferModal.classList.add('active');
+                    });
+                }
+                
+                if (closeModal && quickTransferModal) {
+                    closeModal.addEventListener('click', () => {
+                        quickTransferModal.classList.remove('active');
+                    });
+                }
+                
+                if (quickTransferModal) {
+                    quickTransferModal.addEventListener('click', (e) => {
+                        if (e.target === quickTransferModal) {
+                            quickTransferModal.classList.remove('active');
+                        }
+                    });
+                }
+                
+                if (transferForm) {
+                    transferForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        const amount = document.getElementById('transferAmount').value;
+                        const to = document.getElementById('transferTo').value;
+                        
+                        if (!to) {
+                            showToast('Please select a recipient', 'error');
+                            return;
+                        }
+                        
+                        if (!amount || parseFloat(amount) <= 0) {
+                            showToast('Please enter a valid amount', 'error');
+                            return;
+                        }
+                        
+                        showToast(`Successfully sent $${amount}`, 'success');
+                        
+                        quickTransferModal.classList.remove('active');
+                        transferForm.reset();
+                        
+                        // Update balance (simulated)
+                        const balanceEl = document.getElementById('totalBalance');
+                        if (balanceEl) {
+                            const currentBalance = parseFloat(balanceEl.textContent.replace('$', '').replace(',', ''));
+                            const newBalance = currentBalance - parseFloat(amount);
+                            balanceEl.textContent = `$${newBalance.toFixed(2)}`;
+                        }
+                    });
+                }
+            }
+
+            // ----- SIMULATED LIVE DATA UPDATES -----
+            function initLiveUpdates() {
+                function updateLiveData() {
+                    const balanceEl = document.getElementById('totalBalance');
+                    if (balanceEl) {
+                        const balance = parseFloat(balanceEl.textContent.replace('$', '').replace(',', ''));
+                        const randomChange = (Math.random() * 0.02 - 0.01);
+                        const newBalance = balance * (1 + randomChange);
+                        balanceEl.textContent = `$${newBalance.toFixed(2)}`;
+                        
+                        const changeEl = document.getElementById('balanceChange');
+                        if (changeEl) {
+                            const percent = (randomChange * 100).toFixed(2);
+                            if (randomChange > 0) {
+                                changeEl.className = 'stat-card-change positive';
+                                changeEl.innerHTML = `<i class="fas fa-arrow-up"></i><span>+${percent}%</span>`;
+                            } else {
+                                changeEl.className = 'stat-card-change negative';
+                                changeEl.innerHTML = `<i class="fas fa-arrow-down"></i><span>${percent}%</span>`;
+                            }
+                        }
+                    }
+                }
+                
+                // Update every 30 seconds
+                setInterval(updateLiveData, 30000);
+            }
+
+            // ----- INITIALIZE ALL -----
+            const user = loadCurrentUser();
+            if (user) {
+                initLogout();
+                initMobileMenu();
+                initThemeToggle();
+                initQuickTransfer();
+                initLiveUpdates();
+            }
+        });
+    </script>
+    
+    <style>
+        .upcoming-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .upcoming-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--surface-elevated);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+        
+        .upcoming-item:hover {
+            background: var(--surface-hover);
+            transform: translateX(4px);
+        }
+        
+        .upcoming-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-hover);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-md);
+            color: var(--primary);
+        }
+        
+        .upcoming-info {
+            flex: 1;
+        }
+        
+        .upcoming-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .upcoming-date {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .upcoming-amount {
+            font-weight: 600;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--error);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: var(--radius-full);
+        }
+        
+        #logoutBtn {
+            color: var(--error);
+            transition: all var(--transition-fast);
+        }
+        
+        #logoutBtn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--error);
+        }
+        
+        .toast {
+            position: relative;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-sm);
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid;
+        }
+        
+        .toast.success {
+            border-left-color: var(--success);
+        }
+        
+        .toast.error {
+            border-left-color: var(--error);
+        }
+        
+        .toast.info {
+            border-left-color: var(--info);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+    <script src="js/app.js"></script>
+</body>
+</html>

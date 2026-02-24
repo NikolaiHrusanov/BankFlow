@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | NexusBank</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body class="auth-page">
+
+  <!-- Animated background -->
+  <div class="auth-background"></div>
+  <div class="bg-grain"></div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN LAYOUT
+  ══════════════════════════════════════════ -->
+  <div class="auth-container">
+
+    <!-- ── LEFT PANEL ────────────────────────── -->
+    <div class="auth-left">
+
+      <a href="index.html" class="auth-brand">
+        <div class="brand-logo"><i class="fas fa-bolt"></i></div>
+        <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+      </a>
+
+      <div class="auth-hero">
+        <div class="hero-eyebrow">Private Banking</div>
+
+        <h1 class="auth-title">
+          Banking built<br>for the <span class="italic-accent">modern world</span>
+        </h1>
+
+        <p class="auth-subtitle">
+          Experience a smarter, safer way to manage your money — with real-time insights,
+          instant transfers, and security you can trust.
+        </p>
+
+        <div class="auth-features">
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+            <span>Bank-level 256-bit encryption on every transaction</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <span>Instant transfers to 190+ countries worldwide</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+            <span>AI-powered analytics and smart spending insights</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
+            <span>Biometric authentication for seamless security</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-stats">
+        <div>
+          <div class="stat-number">2M+</div>
+          <div class="stat-label">Trusted users</div>
+        </div>
+        <div>
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div>
+          <div class="stat-number">$4B+</div>
+          <div class="stat-label">Daily volume</div>
+        </div>
+      </div>
+
+    </div><!-- /auth-left -->
+
+    <!-- ── RIGHT PANEL ───────────────────────── -->
+    <div class="auth-right">
+      <div class="auth-right-inner" id="authRightInner">
+        <div class="auth-card">
+
+          <!-- Tab toggle -->
+          <div class="auth-toggle">
+            <button class="toggle-btn active" id="showLoginBtn">Sign In</button>
+            <button class="toggle-btn"        id="showRegisterBtn">Register</button>
+          </div>
+
+          <!-- ════════════════════════
+               LOGIN FORM
+          ════════════════════════ -->
+          <form class="auth-form" id="loginForm" novalidate>
+
+            <div class="auth-header">
+              <h2>Welcome back</h2>
+              <p>Sign in to access your account</p>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label class="form-label" for="loginEmail">Email Address</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-envelope"></i>
+                <input class="form-control" type="email" id="loginEmail"
+                       placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label class="form-label" for="loginPassword">Password</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-lock"></i>
+                <input class="form-control has-action" type="password" id="loginPassword"
+                       placeholder="••••••••" required />
+                <button type="button" class="input-action toggle-pw"
+                        data-target="loginPassword" aria-label="Show password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember me / Forgot -->
+            <div class="form-options">
+              <label class="checkbox">
+                <input type="checkbox" checked /> Remember me
+              </label>
+              <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <span>Sign In</span>
+              <i class="fas fa-arrow-right" style="font-size:.8rem;"></i>
+            </button>
+
+            <div class="auth-divider">or continue with</div>
+
+            <div class="social-login">
+              <button type="button" class="social-btn"><i class="fab fa-google"></i> Google</button>
+              <button type="button" class="social-btn"><i class="fab fa-apple"></i> Apple</button>
+              <button type="button" class="social-btn"><i class="fas fa-fingerprint"></i> Biometric</button>
+            </div>
+
+          </form><!-- /loginForm -->
+
+          <!-- ════════════════════════
+               REGISTER FORM
+          ════════════════════════ -->
+          <form class="auth-form" id="registerForm" style="display:none;" novalidate>
+
+            <!-- Scroll progress bar -->
+            <div class="scroll-progress-wrap">
+              <div class="scroll-progress-fill" id="regProgressFill"></div>
+            </div>
+
+            <div class="auth-header">
+              <h2>Create Account</h2>
+              <p>Fill in your details to get started</p>
+            </div>
+
+            <!-- Full Name -->
+            <div class="form-group">
+              <label class="form-label" for="fullName">Full Name *</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-user"></i>
+                <input class="form-control" type="text" id="fullName"
+                       placeholder="John Doe" required />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label class="form-label" for="regEmail">Email Address *</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-envelope"></i>
+                <input class="form-control" type="email" id="regEmail"
+                       placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label class="form-label" for="address">Address</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-map-marker-alt"></i>
+                <input class="form-control" type="text" id="address"
+                       placeholder="123 Main St, City" />
+              </div>
+            </div>
+
+            <!-- Occupation + Phone -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="occupation">Occupation</label>
+                <div class="input-with-icon">
+                  <i class="fi fas fa-briefcase"></i>
+                  <input class="form-control" type="text" id="occupation"
+                         placeholder="e.g. Engineer" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone</label>
+                <div class="input-with-icon">
+                  <i class="fi fas fa-phone"></i>
+                  <input class="form-control" type="tel" id="phone"
+                         placeholder="+1 234 567 8900" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Age + Birth Year -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="age">Age *</label>
+                <div class="input-with-icon">
+                  <i class="fi fas fa-calendar"></i>
+                  <input class="form-control" type="number" id="age"
+                         placeholder="25" min="18" max="120" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="birthYear">Birth Year *</label>
+                <div class="input-with-icon">
+                  <i class="fi fas fa-calendar-alt"></i>
+                  <input class="form-control" type="number" id="birthYear"
+                         placeholder="1999" min="1900" max="2007" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-hint error" id="ageMismatch" style="display:none;">
+              <i class="fas fa-circle-exclamation"></i> Age and birth year don't match.
+            </div>
+
+            <!-- ID Type -->
+            <div class="form-group" style="margin-top:6px;">
+              <label class="form-label" for="idType">ID Type *</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-id-card"></i>
+                <select class="form-control" id="idType" required>
+                  <option value="" disabled selected>Select ID type</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver">Driver's License</option>
+                  <option value="national">National ID</option>
+                  <option value="student">Student ID</option>
+                  <option value="other">Other Government ID</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Upload ID Document -->
+            <div class="form-group">
+              <label class="form-label">
+                Upload ID Document *
+                <span style="text-transform:none;font-size:.68rem;font-weight:400;opacity:.7;">(JPG, PNG, PDF)</span>
+              </label>
+              <div class="file-upload" id="fileUploadZone">
+                <input type="file" id="idDocument" accept=".jpg,.jpeg,.png,.pdf" required />
+                <div class="file-upload-label">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Click to upload or drag &amp; drop</span>
+                </div>
+              </div>
+              <div class="file-preview" id="filePreview" style="display:none;">
+                <i class="fas fa-file"></i>
+                <span id="fileName"></span>
+                <button type="button" class="btn-remove" id="removeFile">
+                  <i class="fas fa-xmark"></i>
+                </button>
+              </div>
+              <div class="form-hint error" id="fileError" style="display:none;"></div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label class="form-label" for="regPassword">Password *</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-lock"></i>
+                <input class="form-control has-action" type="password" id="regPassword"
+                       placeholder="••••••••" required />
+                <button type="button" class="input-action toggle-pw"
+                        data-target="regPassword" aria-label="Show password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <div class="strength-bar-wrap">
+                <div class="strength-bar" id="strengthBar"></div>
+              </div>
+              <div class="strength-label" id="strengthLabel">Enter a password</div>
+              <div class="password-requirements">
+                <div class="req-item" id="reqLen">✗ At least 8 characters</div>
+                <div class="req-item" id="reqUp">✗ One uppercase letter</div>
+                <div class="req-item" id="reqLo">✗ One lowercase letter</div>
+                <div class="req-item" id="reqNum">✗ One number</div>
+                <div class="req-item" id="reqSp">✗ One special character</div>
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword">Confirm Password *</label>
+              <div class="input-with-icon">
+                <i class="fi fas fa-lock"></i>
+                <input class="form-control has-action" type="password" id="confirmPassword"
+                       placeholder="••••••••" required />
+                <button type="button" class="input-action toggle-pw"
+                        data-target="confirmPassword" aria-label="Show password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <div class="form-hint error" id="pwMismatch" style="display:none;">
+                <i class="fas fa-circle-exclamation"></i> Passwords do not match.
+              </div>
+            </div>
+
+            <div class="form-hint error" id="regError" style="display:none; margin-bottom:14px;"></div>
+
+            <!-- Floating scroll-to-top -->
+            <button type="button" class="float-top" id="floatTop" aria-label="Back to top">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+
+            <button type="submit" class="btn-primary" id="regSubmit" disabled style="margin-top:20px;">
+              <span>Create Account</span>
+              <i class="fas fa-arrow-right" style="font-size:.8rem;"></i>
+            </button>
+
+            <div class="auth-footer">
+              By signing up you agree to our
+              <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </div>
+
+          </form><!-- /registerForm -->
+
+        </div><!-- /auth-card -->
+      </div><!-- /auth-right-inner -->
+    </div><!-- /auth-right -->
+
+  </div><!-- /auth-container -->
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <p style="font-size:.88rem;">Processing…</p>
+  </div>
+
+  <!-- Your existing auth.js (handles login, session, forgot password) -->
+  <script src="js/auth.js"></script>
+
+  <!-- Register form logic (tab switching, strength meter, file upload, scroll progress) -->
+  <script>
+  (function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const showLoginBtn  = document.getElementById('showLoginBtn');
+      const showRegBtn    = document.getElementById('showRegisterBtn');
+      const loginForm     = document.getElementById('loginForm');
+      const registerForm  = document.getElementById('registerForm');
+      const rightInner    = document.getElementById('authRightInner');
+      const loadingOverlay= document.getElementById('loadingOverlay');
+
+      /* ── TAB SWITCHING ──────────────────────── */
+      function showLogin() {
+        loginForm.style.display    = 'block';
+        registerForm.style.display = 'none';
+        showLoginBtn.classList.add('active');
+        showRegBtn.classList.remove('active');
+        rightInner.scrollTop = 0;
+      }
+
+      function showRegister() {
+        loginForm.style.display    = 'none';
+        registerForm.style.display = 'block';
+        showRegBtn.classList.add('active');
+        showLoginBtn.classList.remove('active');
+        rightInner.scrollTop = 0;
+        updateProgress();
+      }
+
+      showLoginBtn.addEventListener('click', showLogin);
+      showRegBtn.addEventListener('click', showRegister);
+
+      /* ── PASSWORD TOGGLE (register + login) ─── */
+      document.querySelectorAll('.toggle-pw').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const inp  = document.getElementById(btn.dataset.target);
+          const icon = btn.querySelector('i');
+          inp.type = inp.type === 'password' ? 'text' : 'password';
+          icon.classList.toggle('fa-eye');
+          icon.classList.toggle('fa-eye-slash');
+        });
+      });
+
+      /* ── PASSWORD STRENGTH ──────────────────── */
+      const pwInp    = document.getElementById('regPassword');
+      const strBar   = document.getElementById('strengthBar');
+      const strLabel = document.getElementById('strengthLabel');
+
+      const rules = [
+        { el: document.getElementById('reqLen'), test: v => v.length >= 8,           p: '✓ At least 8 characters',  f: '✗ At least 8 characters' },
+        { el: document.getElementById('reqUp'),  test: v => /[A-Z]/.test(v),         p: '✓ One uppercase letter',   f: '✗ One uppercase letter' },
+        { el: document.getElementById('reqLo'),  test: v => /[a-z]/.test(v),         p: '✓ One lowercase letter',   f: '✗ One lowercase letter' },
+        { el: document.getElementById('reqNum'), test: v => /[0-9]/.test(v),         p: '✓ One number',             f: '✗ One number' },
+        { el: document.getElementById('reqSp'),  test: v => /[^A-Za-z0-9]/.test(v), p: '✓ One special character',  f: '✗ One special character' },
+      ];
+      const strColors = ['', '#E84393', '#FDCB6E', '#FDCB6E', '#00B894', '#00B894'];
+      const strTexts  = ['', 'Weak', 'Fair', 'Fair', 'Strong', 'Very strong'];
+
+      pwInp.addEventListener('input', () => {
+        const v = pwInp.value; let score = 0;
+        rules.forEach(r => {
+          const ok = r.test(v); if (ok) score++;
+          r.el.textContent = ok ? r.p : r.f;
+          r.el.classList.toggle('met', ok);
+        });
+        strBar.style.width      = (score / 5 * 100) + '%';
+        strBar.style.background = strColors[score] || '';
+        strLabel.textContent    = v ? strTexts[score] : 'Enter a password';
+        validate();
+      });
+
+      /* ── CONFIRM PASSWORD ───────────────────── */
+      const confPw   = document.getElementById('confirmPassword');
+      const mismatch = document.getElementById('pwMismatch');
+      confPw.addEventListener('input', () => {
+        const bad = confPw.value && confPw.value !== pwInp.value;
+        mismatch.style.display = bad ? 'block' : 'none';
+        validate();
+      });
+
+      /* ── AGE / BIRTH YEAR ───────────────────── */
+      const ageInp     = document.getElementById('age');
+      const birthYrInp = document.getElementById('birthYear');
+      const ageErr     = document.getElementById('ageMismatch');
+      const CY         = new Date().getFullYear();
+
+      function checkAge() {
+        const a = parseInt(ageInp.value), y = parseInt(birthYrInp.value);
+        if (a && y) { ageErr.style.display = Math.abs(CY - y - a) > 1 ? 'block' : 'none'; }
+        else        { ageErr.style.display = 'none'; }
+        validate();
+      }
+      ageInp.addEventListener('input', checkAge);
+      birthYrInp.addEventListener('input', checkAge);
+
+      /* ── FILE UPLOAD ────────────────────────── */
+      const fileInp = document.getElementById('idDocument');
+      const fprev   = document.getElementById('filePreview');
+      const fnameEl = document.getElementById('fileName');
+      const rmBtn   = document.getElementById('removeFile');
+      const fErr    = document.getElementById('fileError');
+      const MAX_MB  = 10;
+
+      fileInp.addEventListener('change', () => {
+        const f = fileInp.files[0]; if (!f) return;
+        if (f.size > MAX_MB * 1024 * 1024) {
+          fErr.textContent = `File too large (max ${MAX_MB} MB)`;
+          fErr.style.display = 'block'; fileInp.value = ''; return;
+        }
+        fErr.style.display  = 'none';
+        fnameEl.textContent = f.name;
+        fprev.style.display = 'flex';
+        validate();
+      });
+
+      rmBtn.addEventListener('click', () => {
+        fileInp.value = ''; fprev.style.display = 'none'; fnameEl.textContent = '';
+        validate();
+      });
+
+      /* ── REGISTER VALIDATION ────────────────── */
+      const regSubmit   = document.getElementById('regSubmit');
+      const requiredIds = ['fullName', 'regEmail', 'age', 'birthYear', 'idType', 'regPassword', 'confirmPassword'];
+
+      function validate() {
+        const filled   = requiredIds.every(id => document.getElementById(id).value.trim());
+        const hasFile  = !!fileInp.files[0];
+        const match    = pwInp.value === confPw.value;
+        const noAgeErr = ageErr.style.display !== 'block';
+        const score    = rules.filter(r => r.test(pwInp.value)).length;
+        regSubmit.disabled = !(filled && hasFile && match && noAgeErr && score >= 4);
+      }
+      requiredIds.forEach(id => document.getElementById(id).addEventListener('input', validate));
+
+      /* ── REGISTER SUBMIT ────────────────────── */
+      registerForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (regSubmit.disabled) return;
+
+        const newUser = {
+          id:       Date.now().toString(),
+          fullName: document.getElementById('fullName').value.trim(),
+          email:    document.getElementById('regEmail').value.trim(),
+          password: btoa(pwInp.value), // base64 encode, matching your auth.js pattern
+          phone:    document.getElementById('phone').value.trim(),
+          occupation: document.getElementById('occupation').value.trim(),
+          address:  document.getElementById('address').value.trim(),
+          age:      document.getElementById('age').value,
+          birthYear:document.getElementById('birthYear').value,
+          idType:   document.getElementById('idType').value,
+          createdAt:new Date().toISOString()
+        };
+
+        // Check for duplicate email
+        const users = JSON.parse(localStorage.getItem('nexusbank_users')) || [];
+        if (users.some(u => u.email === newUser.email)) {
+          const regErr = document.getElementById('regError');
+          regErr.textContent = 'An account with this email already exists.';
+          regErr.style.display = 'block';
+          return;
+        }
+
+        // Save user
+        users.push(newUser);
+        localStorage.setItem('nexusbank_users', JSON.stringify(users));
+
+        // Show loading then redirect
+        if (loadingOverlay) loadingOverlay.classList.add('active');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1500);
+      });
+
+      /* ── SCROLL PROGRESS ────────────────────── */
+      const progFill = document.getElementById('regProgressFill');
+      const floatTop = document.getElementById('floatTop');
+
+      function updateProgress() {
+        const max = rightInner.scrollHeight - rightInner.clientHeight;
+        progFill.style.width = max > 0 ? (rightInner.scrollTop / max * 100) + '%' : '0%';
+        floatTop.classList.toggle('visible', rightInner.scrollTop > 160);
+      }
+
+      rightInner.addEventListener('scroll', updateProgress);
+      floatTop.addEventListener('click', () => rightInner.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    }); // DOMContentLoaded
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+/* Transactions Page Specific Styles */
+
+/* Transactions Filters Section */
+.transactions-filters {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin: 0 var(--space-xl) var(--space-xl);
+}
+
+.filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.filters-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: var(--space-md);
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.filter-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.filter-actions {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+/* Transactions Table */
+.transaction-table {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    margin: 0 var(--space-xl) var(--space-2xl);
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--surface-elevated);
+    border-bottom: 1px solid var(--border-light);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table-rows {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--border-light);
+    align-items: center;
+    transition: all var(--transition-fast);
+}
+
+.table-row:hover {
+    background: var(--surface-hover);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+/* Transaction Cells */
+.transaction-detail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--surface-hover);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    transition: all var(--transition-fast);
+}
+
+.table-row:hover .transaction-icon {
+    color: var(--primary);
+}
+
+.transaction-title {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.transaction-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.transaction-category {
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--surface-hover);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+    color: var(--text-secondary);
+}
+
+.account-badge {
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--surface-hover);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--text-secondary);
+}
+
+.transaction-date {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.transaction-amount {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.transaction-amount.positive {
+    color: var(--success);
+}
+
+.transaction-amount.negative {
+    color: var(--error);
+}
+
+/* Action Buttons */
+.transaction-actions {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Pagination */
+.table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-xl);
+    border-top: 1px solid var(--border-light);
+    background: var(--surface-elevated);
+}
+
+.pagination-info {
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.page-btn {
+    min-width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.875rem;
+    padding: 0 var(--space-xs);
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.page-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Transaction Details Modal */
+.transaction-details {
+    padding: var(--space-xl);
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.detail-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--surface-hover);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.detail-info p {
+    color: var(--text-secondary);
+}
+
+.detail-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.detail-amount.positive {
+    color: var(--success);
+}
+
+.detail-amount.negative {
+    color: var(--error);
+}
+
+.detail-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.detail-section h4 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.detail-value {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.status-completed {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.detail-actions {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.detail-actions .btn {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Category List with Amounts */
+.category-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-amount {
+    font-weight: 500;
+    text-align: right;
+    color: var(--text-primary);
+    min-width: 80px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .filters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filter-actions {
+        grid-column: span 2;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 1024px) {
+    .table-header {
+        display: none; /* Hide header on mobile */
+    }
+    
+    .table-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        position: relative;
+    }
+    
+    .transaction-detail {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .transaction-category {
+        display: inline-block;
+        width: fit-content;
+    }
+    
+    .transaction-date {
+        color: var(--text-tertiary);
+    }
+    
+    .transaction-actions {
+        position: absolute;
+        top: var(--space-lg);
+        right: var(--space-lg);
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detail-actions {
+        flex-direction: column;
+    }
+    
+    .detail-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .transactions-filters,
+    .transaction-table {
+        margin: 0 var(--space-md) var(--space-md);
+    }
+    
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-actions {
+        grid-column: span 1;
+    }
+    
+    .table-pagination {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+    
+    .pagination-controls {
+        flex-wrap: wrap;
+    }
+    
+    .category-item {
+        grid-template-columns: 1fr auto;
+    }
+    
+    .category-bar {
+        grid-column: span 2;
+        margin: var(--space-xs) 0;
+    }
+    
+    .detail-header {
+        padding-bottom: var(--space-lg);
+    }
+    
+    .detail-info h3 {
+        font-size: 1.25rem;
+    }
+    
+    .detail-amount {
+        font-size: 1.25rem;
+    }
+}
+
+/* Dark theme adjustments */
+.dark-theme .table-header {
+    background: var(--surface);
+}
+
+.dark-theme .page-btn.active {
+    background: var(--primary-dark);
+}
+
+/* Print styles */
+@media print {
+    .sidebar,
+    .main-header,
+    .transactions-filters,
+    .transaction-actions,
+    .table-pagination {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .transaction-table {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+    
+    .table-row {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

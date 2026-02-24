@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts | NexusBank</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/accounts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Page-level overrides ── */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ════════════════════════════════
+           SIDEBAR
+        ════════════════════════════════ */
+        .sidebar {
+            width: 260px;
+            background: var(--surface);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            z-index: 200;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+        }
+        .sidebar-overlay.active { display: block; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .brand {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: var(--text-primary);
+            font-weight: 700; font-size: 1.25rem;
+        }
+        .brand-logo {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1rem;
+        }
+        .brand-accent { color: var(--primary); }
+
+        .sidebar-user {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .user-avatar {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .user-info { flex: 1; min-width: 0; }
+        .user-name { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .user-email { font-size: 0.75rem; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .theme-toggle {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-secondary); font-size: 1rem;
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: background 0.2s;
+        }
+        .theme-toggle:hover { background: var(--surface-hover); color: var(--primary); }
+
+        .sidebar-nav { flex: 1; overflow-y: auto; padding: 1rem 0; }
+        .nav-section { margin-bottom: 1.5rem; }
+        .nav-section-title {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-tertiary);
+            padding: 0 1.5rem 0.5rem;
+        }
+        .sidebar-nav .nav-item {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.65rem 1.5rem;
+            text-decoration: none; color: var(--text-secondary);
+            font-weight: 500; font-size: 0.9rem;
+            transition: all 0.2s; border-radius: 0;
+            position: relative;
+        }
+        .sidebar-nav .nav-item:hover { background: var(--surface-hover); color: var(--text-primary); }
+        .sidebar-nav .nav-item.active {
+            background: rgba(99,102,241,0.1);
+            color: var(--primary);
+        }
+        .sidebar-nav .nav-item.active::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; background: var(--primary); border-radius: 0 2px 2px 0;
+        }
+        .nav-item-icon {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; font-size: 0.9rem;
+            background: var(--surface-elevated);
+            flex-shrink: 0; transition: background 0.2s;
+        }
+        .sidebar-nav .nav-item.active .nav-item-icon { background: rgba(99,102,241,0.15); }
+
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+        .btn-ghost {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: none; border: none; cursor: pointer;
+            color: var(--text-secondary); font-size: 0.875rem;
+            font-weight: 500; padding: 0.6rem 1rem;
+            border-radius: 8px; text-decoration: none;
+            transition: all 0.2s; width: 100%;
+        }
+        .btn-ghost:hover { background: var(--surface-hover); color: var(--error); }
+        .btn-block { width: 100%; }
+
+        /* ════════════════════════════════
+           MAIN CONTENT
+        ════════════════════════════════ */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            display: flex; flex-direction: column;
+        }
+        @media (max-width: 768px) { .main-content { margin-left: 0; } }
+
+        .main-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.25rem 2rem;
+            display: flex; align-items: center; gap: 1rem;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            cursor: pointer; color: var(--text-secondary); font-size: 1.25rem;
+            width: 40px; height: 40px;
+            align-items: center; justify-content: center; border-radius: 8px;
+        }
+        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
+
+        .header-title { flex: 1; }
+        .header-title h1 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+        .header-title p { font-size: 0.8rem; color: var(--text-tertiary); margin: 0; }
+
+        .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; border: none; cursor: pointer;
+            padding: 0.6rem 1.25rem; border-radius: 10px;
+            font-weight: 600; font-size: 0.875rem; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.35); }
+
+        /* ════════════════════════════════
+           PAGE CONTENT STYLES
+        ════════════════════════════════ */
+        .page-body { padding: 2rem; max-width: 1100px; }
+
+        /* Hero Banner */
+        .accounts-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 3rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .accounts-hero::before {
+            content: '';
+            position: absolute; top: -60%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .accounts-hero::after {
+            content: '';
+            position: absolute; bottom: -40%; left: 20%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 600px; }
+        .hero-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.35rem 0.9rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 1.25rem;
+        }
+        .accounts-hero h2 {
+            font-size: clamp(1.6rem, 3vw, 2.25rem);
+            font-weight: 700; margin-bottom: 0.75rem; line-height: 1.2;
+        }
+        .accounts-hero p {
+            opacity: 0.9; font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #fff; color: var(--primary-dark);
+            padding: 0.75rem 1.75rem; border-radius: 10px;
+            font-weight: 700; font-size: 0.9rem; text-decoration: none;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+        /* Section Title */
+        .section-label {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--primary); margin-bottom: 0.5rem;
+        }
+        .section-heading {
+            font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .section-sub {
+            font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Account Type Cards */
+        .account-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .account-type-card {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 1.75rem;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .account-type-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .account-type-card.checking::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+        .account-type-card.savings::before  { background: linear-gradient(90deg, #10b981, #06b6d4); }
+        .account-type-card.investment::before { background: linear-gradient(90deg, #f59e0b, #f97316); }
+
+        .account-type-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+            border-color: transparent;
+        }
+        .account-type-card:hover::before { opacity: 1; }
+
+        .atc-icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: #fff; margin-bottom: 1.25rem;
+        }
+        .atc-icon.checking   { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .atc-icon.savings    { background: linear-gradient(135deg, #10b981, #06b6d4); }
+        .atc-icon.investment { background: linear-gradient(135deg, #f59e0b, #f97316); }
+
+        .atc-badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.8px; padding: 0.25rem 0.7rem;
+            border-radius: 100px; margin-bottom: 0.75rem;
+        }
+        .atc-badge.checking   { background: rgba(99,102,241,0.12); color: #818cf8; }
+        .atc-badge.savings    { background: rgba(16,185,129,0.12); color: #34d399; }
+        .atc-badge.investment { background: rgba(245,158,11,0.12); color: #fbbf24; }
+
+        .atc-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .atc-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+
+        .atc-features { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+        .atc-features li {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-size: 0.85rem; color: var(--text-secondary);
+            padding: 0.35rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .atc-features li:last-child { border-bottom: none; }
+        .atc-features li i { color: var(--success); font-size: 0.75rem; flex-shrink: 0; }
+
+        .atc-highlight {
+            background: var(--surface-elevated);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .atc-highlight-label { font-size: 0.78rem; color: var(--text-tertiary); }
+        .atc-highlight-value { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 28px; left: calc(50px + 1rem); right: calc(50px + 1rem);
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.3;
+        }
+        @media (max-width: 768px) { .steps-grid::before { display: none; } }
+
+        .step { display: flex; flex-direction: column; align-items: flex-start; }
+        .step-number {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; font-weight: 800; font-size: 1.1rem;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1rem; flex-shrink: 0; position: relative; z-index: 1;
+        }
+        .step-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .step-desc { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.55; }
+
+        /* Features / Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .benefit-card {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+            transition: all 0.2s;
+        }
+        .benefit-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .benefit-icon {
+            width: 40px; height: 40px; flex-shrink: 0;
+            border-radius: 10px; background: rgba(99,102,241,0.12);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 1rem;
+        }
+        .benefit-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+        .benefit-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* Security Section */
+        .security-section {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+        }
+        .security-icon-wrap {
+            width: 72px; height: 72px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: #fff;
+        }
+        .security-content { flex: 1; min-width: 220px; }
+        .security-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .security-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; }
+        .security-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .sec-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--surface-elevated); border: 1px solid var(--border-light);
+            padding: 0.35rem 0.85rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);
+        }
+        .sec-badge i { color: var(--success); }
+
+        /* FAQ Accordion */
+        .faq-section { margin-bottom: 2.5rem; }
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .faq-question {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.1rem 1.5rem;
+            cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            transition: background 0.2s; user-select: none;
+        }
+        .faq-question:hover { background: var(--surface-hover); }
+        .faq-question i { color: var(--primary); transition: transform 0.3s; font-size: 0.85rem; flex-shrink: 0; }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.2s ease;
+            font-size: 0.875rem; color: var(--text-secondary);
+            line-height: 1.7; padding: 0 1.5rem;
+        }
+        .faq-item.open .faq-answer { max-height: 200px; padding: 0 1.5rem 1.25rem; }
+
+        /* CTA Bottom */
+        .cta-bottom {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: #fff; text-align: center;
+            position: relative; overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .cta-bottom::before {
+            content: '';
+            position: absolute; top: -50%; right: -20%;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .cta-bottom-inner { position: relative; z-index: 1; max-width: 500px; margin: 0 auto; }
+        .cta-bottom h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .cta-bottom p { opacity: 0.88; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .cta-btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn-white {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #fff; color: var(--primary-dark);
+            padding: 0.75rem 1.5rem; border-radius: 10px;
+            font-weight: 700; font-size: 0.9rem; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .cta-btn-outline {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.15); color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.75rem 1.5rem; border-radius: 10px;
+            font-weight: 600; font-size: 0.9rem; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .cta-btn-outline:hover { background: rgba(255,255,255,0.25); }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); z-index: 500;
+            align-items: center; justify-content: center; padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--surface); border-radius: 20px;
+            padding: 2rem; width: 100%; max-width: 500px;
+            max-height: 90vh; overflow-y: auto;
+            border: 1px solid var(--border-light);
+        }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-title { font-size: 1.25rem; font-weight: 700; }
+        .modal-close {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-secondary); font-size: 1.2rem;
+            width: 36px; height: 36px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .modal-close:hover { background: var(--surface-hover); color: var(--error); }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .form-control {
+            width: 100%; padding: 0.7rem 1rem;
+            background: var(--surface-elevated); border: 1px solid var(--border-input);
+            border-radius: 10px; color: var(--text-primary);
+            font-size: 0.9rem; transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-control:focus { outline: none; border-color: var(--primary); }
+        .form-hint { display: block; margin-top: 0.4rem; font-size: 0.75rem; color: var(--text-tertiary); }
+
+        .account-type-options {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+        }
+        .account-option { cursor: pointer; }
+        .account-option input { display: none; }
+        .account-option input:checked + .option-content {
+            border-color: var(--primary);
+            background: rgba(99,102,241,0.08);
+        }
+        .option-content {
+            background: var(--surface-elevated); border: 2px solid var(--border-light);
+            border-radius: 12px; padding: 1rem 0.75rem;
+            text-align: center; transition: all 0.2s;
+        }
+        .option-content:hover { border-color: var(--primary); }
+        .option-content i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; display: block; }
+        .option-content span { display: block; font-weight: 600; font-size: 0.8rem; margin-bottom: 0.25rem; }
+        .option-content small { font-size: 0.7rem; color: var(--text-tertiary); line-height: 1.3; display: block; }
+
+        .checkbox { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; }
+        .checkbox input { width: 16px; height: 16px; margin-top: 2px; cursor: pointer; }
+        .checkbox-label { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Prevent flash of light theme -->
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const isDark = saved ? saved === 'dark' : true;
+            if (isDark) {
+                document.documentElement.classList.add('dark-theme');
+                document.body.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+                document.body.classList.remove('dark-theme');
+            }
+        })();
+    </script>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand">
+                    <div class="brand-logo"><i class="fas fa-bolt"></i></div>
+                    <span class="brand-name">Nexus<span class="brand-accent">Bank</span></span>
+                </a>
+            </div>
+
+            <div class="sidebar-user" style="flex-direction:column;align-items:flex-start;gap:0.65rem;padding:1.1rem 1.5rem;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+                    <span style="font-size:0.72rem;color:var(--text-tertiary);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">Not signed in</span>
+                    <button class="theme-toggle" id="sidebarThemeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <a href="login.html" style="display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0.55rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.82rem;width:100%;justify-content:center;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+                    <i class="fas fa-sign-in-alt"></i> Sign In to Your Account
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item active">
+                        <div class="nav-item-icon"><i class="fas fa-wallet"></i></div>
+                        <span>Accounts</span>
+                    </a>
+                    <a href="transfer.html" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <span>Transfers</span>
+                    </a>
+                    <a href="transactions.html" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-history"></i></div>
+                        <span>Transactions</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Financial</div>
+                    <a href="investments.html" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-chart-line"></i></div>
+                        <span>Investments</span>
+                    </a>
+                    <a href="cards.html" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-credit-card"></i></div>
+                        <span>Cards</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div class="nav-item-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <span>Savings Goals</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn-ghost">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1>Accounts</h1>
+                    <p>Explore our account types and features</p>
+                </div>
+                <div class="header-actions">
+                    <a href="login.html" class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        <span>Open Account</span>
+                    </a>
+                </div>
+            </header>
+
+            <div class="page-body">
+
+                <!-- Hero Banner -->
+                <div class="accounts-hero">
+                    <div class="hero-inner">
+                        <div class="hero-label">
+                            <i class="fas fa-shield-alt"></i>
+                            NexusBank Accounts
+                        </div>
+                        <h2>Banking built around you</h2>
+                        <p>From everyday spending to long-term savings and investments — NexusBank gives you the right account for every goal. Sign in to view your balances and manage your money.</p>
+                        <a href="login.html" class="hero-cta">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign in to your account
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Account Types -->
+                <div class="section-label">Account Types</div>
+                <div class="section-heading">Choose the right account for you</div>
+                <p class="section-sub">NexusBank offers three core account types, each designed with a specific financial purpose. You can open multiple accounts and manage them all in one place.</p>
+
+                <div class="account-types-grid">
+                    <!-- Checking -->
+                    <div class="account-type-card checking">
+                        <div class="atc-icon checking"><i class="fas fa-university"></i></div>
+                        <div class="atc-badge checking"><i class="fas fa-circle" style="font-size:0.5rem"></i> Most Popular</div>
+                        <div class="atc-name">Checking Account</div>
+                        <div class="atc-desc">Your everyday spending account. Use it for purchases, bill payments, direct deposits, and transfers with no limits on transactions.</div>
+                        <ul class="atc-features">
+                            <li><i class="fas fa-check-circle"></i> No monthly fees, ever</li>
+                            <li><i class="fas fa-check-circle"></i> Instant debit card issued</li>
+                            <li><i class="fas fa-check-circle"></i> Free ATM withdrawals worldwide</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time transaction alerts</li>
+                            <li><i class="fas fa-check-circle"></i> Overdraft protection available</li>
+                        </ul>
+                        <div class="atc-highlight">
+                            <span class="atc-highlight-label">Minimum Opening Deposit</span>
+                            <span class="atc-highlight-value">$25</span>
+                        </div>
+                    </div>
+
+                    <!-- Savings -->
+                    <div class="account-type-card savings">
+                        <div class="atc-icon savings"><i class="fas fa-piggy-bank"></i></div>
+                        <div class="atc-badge savings"><i class="fas fa-circle" style="font-size:0.5rem"></i> High Yield</div>
+                        <div class="atc-name">Savings Account</div>
+                        <div class="atc-desc">Grow your money faster with one of the highest APYs available. Perfect for emergency funds, holiday savings, or any specific savings goal.</div>
+                        <ul class="atc-features">
+                            <li><i class="fas fa-check-circle"></i> 4.25% APY — industry-leading rate</li>
+                            <li><i class="fas fa-check-circle"></i> Interest paid monthly</li>
+                            <li><i class="fas fa-check-circle"></i> Instant transfers to checking</li>
+                            <li><i class="fas fa-check-circle"></i> Savings goal tracker built in</li>
+                            <li><i class="fas fa-check-circle"></i> FDIC insured up to $250,000</li>
+                        </ul>
+                        <div class="atc-highlight">
+                            <span class="atc-highlight-label">Current APY Rate</span>
+                            <span class="atc-highlight-value" style="color: #34d399;">4.25%</span>
+                        </div>
+                    </div>
+
+                    <!-- Investment -->
+                    <div class="account-type-card investment">
+                        <div class="atc-icon investment"><i class="fas fa-chart-line"></i></div>
+                        <div class="atc-badge investment"><i class="fas fa-circle" style="font-size:0.5rem"></i> Growth</div>
+                        <div class="atc-name">Investment Account</div>
+                        <div class="atc-desc">Put your money to work with access to stocks, ETFs, and mutual funds. AI-powered insights help you build and rebalance your portfolio.</div>
+                        <ul class="atc-features">
+                            <li><i class="fas fa-check-circle"></i> Commission-free trades</li>
+                            <li><i class="fas fa-check-circle"></i> Stocks, ETFs & mutual funds</li>
+                            <li><i class="fas fa-check-circle"></i> AI portfolio recommendations</li>
+                            <li><i class="fas fa-check-circle"></i> Auto-invest & DCA support</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time market data</li>
+                        </ul>
+                        <div class="atc-highlight">
+                            <span class="atc-highlight-label">Minimum Opening Deposit</span>
+                            <span class="atc-highlight-value">$100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How It Works -->
+                <div class="how-it-works">
+                    <div class="section-label" style="margin-bottom:0.5rem">How It Works</div>
+                    <div class="section-heading" style="margin-bottom:0.25rem">Open an account in 4 steps</div>
+                    <p class="section-sub" style="margin-bottom:1.75rem">Everything is done online. No branch visits, no paperwork — just fill in your details and you're ready to go.</p>
+                    <div class="steps-grid">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Create your profile</div>
+                            <div class="step-desc">Provide your full name, email, address, occupation, phone number, age, and birth year to get started.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Verify your identity</div>
+                            <div class="step-desc">Upload a valid government-issued ID — Passport, Driver's License, National ID, Student ID, or other official document.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Set up your password</div>
+                            <div class="step-desc">Create a strong password with at least 8 characters, including uppercase, lowercase, a number, and a special character.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Start banking</div>
+                            <div class="step-desc">Your account is active immediately. Access your dashboard, make transfers, and manage all your finances in one place.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="section-label">Why NexusBank</div>
+                <div class="section-heading">Every account comes with</div>
+                <p class="section-sub">No matter which account type you choose, these features come standard for all NexusBank customers.</p>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <div class="benefit-title">Instant Transfers</div>
+                            <div class="benefit-desc">Send money to anyone, instantly, 24/7 — with zero fees on internal transfers.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div>
+                            <div class="benefit-title">Spending Insights</div>
+                            <div class="benefit-desc">Automatic transaction categorization and monthly spending reports.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+                        <div>
+                            <div class="benefit-title">Smart Alerts</div>
+                            <div class="benefit-desc">Get notified the moment any activity happens on your account in real time.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <div class="benefit-title">Mobile Banking</div>
+                            <div class="benefit-desc">Full-featured mobile app for iOS and Android. Bank from anywhere, anytime.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+                        <div>
+                            <div class="benefit-title">24/7 Support</div>
+                            <div class="benefit-desc">Live chat, phone, and email support available around the clock, every day.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <div>
+                            <div class="benefit-title">No Hidden Fees</div>
+                            <div class="benefit-desc">No monthly maintenance fees, no minimum balance requirements, no surprises.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="security-section">
+                    <div class="security-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+                    <div class="security-content">
+                        <h3>Your money is safe with us</h3>
+                        <p>NexusBank uses bank-level 256-bit encryption, multi-factor authentication, and biometric verification to protect every account. All deposits are FDIC insured up to $250,000 per depositor. We monitor your account 24/7 for suspicious activity and will alert you immediately if anything looks unusual.</p>
+                        <div class="security-badges">
+                            <span class="sec-badge"><i class="fas fa-check-circle"></i> FDIC Insured</span>
+                            <span class="sec-badge"><i class="fas fa-check-circle"></i> 256-bit SSL</span>
+                            <span class="sec-badge"><i class="fas fa-check-circle"></i> 2FA Enabled</span>
+                            <span class="sec-badge"><i class="fas fa-check-circle"></i> Fraud Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div class="faq-section">
+                    <div class="section-label">FAQ</div>
+                    <div class="section-heading">Common questions</div>
+                    <p class="section-sub">Everything you need to know before opening an account.</p>
+
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">How long does it take to open an account? <i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer">Opening an account at NexusBank takes less than 5 minutes. You'll need a valid government-issued ID, your Social Security Number, and a funding source such as an existing bank account or debit card. Once verified, your account is active immediately.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">Can I have multiple account types at the same time? <i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer">Absolutely. You can open a Checking, Savings, and Investment account simultaneously and manage them all from one dashboard. Transfers between your accounts are instant and free.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">Are there any monthly fees? <i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer">No. NexusBank charges zero monthly maintenance fees on all account types. There are no minimum balance requirements and no hidden charges. The only fees that may apply are for optional premium features like wire transfers to international accounts.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">How is the 4.25% APY savings rate calculated? <i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer">The APY (Annual Percentage Yield) is calculated daily and credited to your savings account at the end of each calendar month. The rate is variable and subject to change, though we always aim to offer one of the most competitive rates in the market.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">What happens if I suspect unauthorized activity? <i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer">Contact our 24/7 support team immediately via live chat or phone. You can also freeze your account instantly from the app with a single tap. NexusBank's fraud team will investigate and, if confirmed, will refund any unauthorized transactions within 3 business days.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Bottom -->
+                <div class="cta-bottom">
+                    <div class="cta-bottom-inner">
+                        <h3>Ready to open your account?</h3>
+                        <p>Join thousands of NexusBank customers who manage their money smarter. It's free to get started.</p>
+                        <div class="cta-btn-group">
+                            <a href="login.html" class="cta-btn-white">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </a>
+                            <a href="login.html" class="cta-btn-outline">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /page-body -->
+        </main>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            });
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+
+            // Theme toggle
+            const themeToggle = document.getElementById('sidebarThemeToggle');
+            const applyTheme = (dark) => {
+                document.documentElement.classList.toggle('dark-theme', dark);
+                document.body.classList.toggle('dark-theme', dark);
+                const icon = themeToggle.querySelector('i');
+                icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+                localStorage.setItem('theme', dark ? 'dark' : 'light');
+            };
+            themeToggle.addEventListener('click', () => {
+                applyTheme(!document.documentElement.classList.contains('dark-theme'));
+            });
+            const saved = localStorage.getItem('theme');
+            const isDarkOnLoad = saved ? saved === 'dark' : true;
+            applyTheme(isDarkOnLoad);
+
+            // FAQ accordion
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.addEventListener('click', () => {
+                    const item = q.closest('.faq-item');
+                    const isOpen = item.classList.contains('open');
+                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                    if (!isOpen) item.classList.add('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
