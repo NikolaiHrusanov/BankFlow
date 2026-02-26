@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-theme">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accounts | NexusBank</title>
+    <!-- FIX 1: Theme script BEFORE stylesheets so dark-theme is set before CSS loads -->
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const isDark = saved ? saved === 'dark' : true;
+            if (isDark) {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/accounts.css">
@@ -12,6 +24,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* FIX 2: Force body to use dark background variable, not the white default */
+        body {
+            background-color: var(--bg-secondary) !important;
+        }
+
         /* ── Page-level overrides ── */
         .app-container {
             display: flex;
@@ -536,21 +553,7 @@
         .checkbox-label { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; }
     </style>
 </head>
-<body class="dark-theme">
-    <!-- Prevent flash of light theme -->
-    <script>
-        (function() {
-            const saved = localStorage.getItem('theme');
-            const isDark = saved ? saved === 'dark' : true;
-            if (isDark) {
-                document.documentElement.classList.add('dark-theme');
-                document.body.classList.add('dark-theme');
-            } else {
-                document.documentElement.classList.remove('dark-theme');
-                document.body.classList.remove('dark-theme');
-            }
-        })();
-    </script>
+<body>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="app-container">
@@ -564,9 +567,8 @@
             </div>
 
             <div class="sidebar-user" style="flex-direction:column;align-items:flex-start;gap:0.65rem;padding:1.1rem 1.5rem;">
-                <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+                <div style="display:flex;align-items:center;width:100%">
                     <span style="font-size:0.72rem;color:var(--text-tertiary);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">Not signed in</span>
-                    <button class="theme-toggle" id="sidebarThemeToggle"><i class="fas fa-moon"></i></button>
                 </div>
                 <a href="login.html" style="display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0.55rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.82rem;width:100%;justify-content:center;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
                     <i class="fas fa-sign-in-alt"></i> Sign In to Your Account
