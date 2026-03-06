@@ -37,25 +37,26 @@
         </a>
       </div>
 
-     <div class="sidebar-user">
+     <div class="sidebar-user" style="flex-direction:column;align-items:flex-start;gap:0.65rem;padding:1.1rem 1.5rem;">
     
+    <div style="display:flex;align-items:center;width:100%;">
+        <span style="font-size:0.72rem;color:var(--text-tertiary);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">
+            Not signed in
+        </span>
+    </div>
 
-    <div class="sidebar-user" style="flex-direction:column;align-items:center;gap:0.5rem;padding:1.1rem 1.5rem;">
+    <a href="login.html" 
+       style="display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0.55rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.82rem;width:100%;justify-content:center;transition:opacity 0.2s;"
+       onmouseover="this.style.opacity='0.8'" 
+       onmouseout="this.style.opacity='1'">
 
-    <span style="font-size:0.75rem;color:var(--text-tertiary);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;">
-        Not signed in
-    </span>
-
-    <a href="login.html" class="small-login-btn">
-        Sign In
+        <i class="fas fa-sign-in-alt"></i>
+        Sign In to Your Account
     </a>
 
 </div>
 
-        <button class="theme-toggle" id="sidebarThemeToggle" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
+      
 
       <nav class="sidebar-nav">
         <div class="nav-section">
@@ -212,86 +213,9 @@
           <!-- ── STEP 1: RECIPIENT ────────────── -->
           <div class="transfer-step active" id="step1">
             <div class="step-header">
-              <h2>Choose Recipient</h2>
-              <p>Who would you like to send money to?</p>
-            </div>
+            
 
-            <div class="section">
-              <div class="section-header">
-                <h3>Quick Recipients</h3>
-                <button class="btn-sm" id="addRecipientBtn">
-                  <i class="fas fa-plus"></i> Add New
-                </button>
-              </div>
-
-              <div class="recipient-grid">
-                <div class="recipient-card selected" data-name="Jane Smith" data-detail="•••• 1234">
-                  <div class="recipient-avatar">JS</div>
-                  <div class="recipient-info">
-                    <div class="recipient-name">Jane Smith</div>
-                    <div class="recipient-details">•••• 1234</div>
-                  </div>
-                  <div class="recipient-meta"><span class="badge">Frequent</span></div>
-                </div>
-
-                <div class="recipient-card" data-name="Alex Doe" data-detail="alex@example.com">
-                  <div class="recipient-avatar">AD</div>
-                  <div class="recipient-info">
-                    <div class="recipient-name">Alex Doe</div>
-                    <div class="recipient-details">alex@example.com</div>
-                  </div>
-                </div>
-
-                <div class="recipient-card" data-name="ACME Corp" data-detail="Invoice #123">
-                  <div class="recipient-avatar">AC</div>
-                  <div class="recipient-info">
-                    <div class="recipient-name">ACME Corp</div>
-                    <div class="recipient-details">Vendor • Invoice #123</div>
-                  </div>
-                </div>
-
-                <div class="recipient-card add-new-card">
-                  <div class="recipient-avatar" style="background: var(--surface); border: 1.5px dashed var(--border-md); color: var(--text-3);">
-                    <i class="fas fa-plus"></i>
-                  </div>
-                  <div class="recipient-info">
-                    <div class="recipient-name">New Recipient</div>
-                    <div class="recipient-details">Add bank or email</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="section">
-              <div class="section-header"><h3>Or Enter Manually</h3></div>
-              <div class="manual-transfer">
-                <div class="form-group">
-                  <label class="form-label" for="transferType">Transfer To</label>
-                  <select class="form-select" id="transferType">
-                    <option value="bank">Bank Account</option>
-                    <option value="email">Email Address</option>
-                    <option value="mobile">Mobile Number</option>
-                    <option value="international">International Wire</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="recipientDetails">Recipient Details</label>
-                  <input type="text" class="form-control" id="recipientDetails" placeholder="Account number, email, or mobile" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="recipientName">Recipient Name</label>
-                  <input type="text" class="form-control" id="recipientName" placeholder="Full name of recipient" />
-                </div>
-              </div>
-            </div>
-
-            <div class="step-actions">
-              <div></div><!-- spacer -->
-              <button class="btn-primary" id="nextStep1">
-                Continue to Amount <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
+          
 
           <!-- ── STEP 2: AMOUNT ───────────────── -->
           <div class="transfer-step" id="step2">
@@ -481,54 +405,9 @@
         <!-- ══════════════════════════════════
              RECENT TRANSFERS
         ══════════════════════════════════ -->
-        <div class="recent-transfers">
-          <div class="transfers-header">
-            <h2>Recent Transfers</h2>
-            <a href="transactions.html" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
-          </div>
+        
 
-          <div class="transaction-list">
-            <div class="transaction-item">
-              <div class="transaction-icon"><i class="fas fa-user"></i></div>
-              <div class="transaction-info">
-                <div class="transaction-title">To Jane Smith</div>
-                <div class="transaction-subtitle">Today · Instant Transfer</div>
-              </div>
-              <div class="transaction-amount negative">−$250.00</div>
-              <div class="transaction-status status-completed">Completed</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-icon"><i class="fas fa-building"></i></div>
-              <div class="transaction-info">
-                <div class="transaction-title">ACME Corp Payment</div>
-                <div class="transaction-subtitle">Yesterday · Invoice #123</div>
-              </div>
-              <div class="transaction-amount negative">−$1,200.00</div>
-              <div class="transaction-status status-completed">Completed</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-icon"><i class="fas fa-exchange-alt"></i></div>
-              <div class="transaction-info">
-                <div class="transaction-title">To Savings Account</div>
-                <div class="transaction-subtitle">Oct 12 · Internal Transfer</div>
-              </div>
-              <div class="transaction-amount negative">−$500.00</div>
-              <div class="transaction-status status-completed">Completed</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-icon"><i class="fas fa-user-friends"></i></div>
-              <div class="transaction-info">
-                <div class="transaction-title">To Alex Doe</div>
-                <div class="transaction-subtitle">Oct 10 · Scheduled Transfer</div>
-              </div>
-              <div class="transaction-amount negative">−$75.00</div>
-              <div class="transaction-status status-pending">Pending</div>
-            </div>
-          </div>
-        </div>
+       
 
       </div><!-- /page-body -->
     </main>

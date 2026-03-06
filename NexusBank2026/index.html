@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-theme">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexusBank | Modern Digital Banking</title>
-   <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!--- Floating Navigation --->
+    <!-- Floating Navigation -->
     <nav class="floating-nav">
         <div class="container">
-            <!-- Brand now lives inside the nav -->
             <a href="index.html" class="nav-brand">
                 Nexus<span class="accent">Bank</span>
             </a>
 
-            <!-- Navigation items -->
             <div class="nav-row">
                 <a href="index.html" class="nav-item active">
                     <i class="fas fa-home"></i>
@@ -142,97 +142,234 @@
         </div>
     </section>
 
+    <!-- Features Section - Revolut Style -->
     <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">Features</div>
-                <h2 class="section-title">Everything you need in one place</h2>
-                <p class="section-subtitle">Designed for speed, built for security</p>
+<!-- Features Section - Premium Design -->
+<section class="features-section" id="features">
+    <div class="container">
+        <!-- Section Header with animated gradient -->
+        <div class="section-header">
+            <div class="section-badge-wrapper">
+                <span class="section-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Why choose us</span>
+                </span>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon bg-gradient-1">
+            <h2 class="section-title">
+                Banking that actually
+                <span class="gradient-text">feels good</span>
+            </h2>
+            
+            <p class="section-subtitle">
+                Stop settling for boring banking. Experience the future of finance with features 
+                designed to make you smile.
+            </p>
+        </div>
+        
+        <!-- Features Grid - Premium Cards -->
+        <div class="features-grid">
+            
+            <!-- CARD 1 - Instant Transfers (Premium) -->
+            <div class="feature-card premium-card">
+                <div class="card-glow"></div>
+                
+                <div class="card-badge">
+                    <span class="badge-new">🔥 HOT</span>
+                </div>
+                
+                <div class="card-icon-wrapper">
+                    <div class="card-icon-circle">
+                        <div class="icon-bg"></div>
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3 class="feature-title">Instant Transfers</h3>
-                    <p class="feature-description">
-                        Send money anywhere in seconds with zero fees. 24/7 availability.
-                    </p>
-                    <a href="transfer.html" class="feature-link">
+                </div>
+                
+                <h3 class="card-title">Instant Transfers</h3>
+                
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">0.1<span class="stat-unit">s</span></span>
+                        <span class="stat-label">Transfer time</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value">100<span class="stat-unit">+</span></span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                </div>
+                
+                <p class="card-description">
+                    Send money anywhere in seconds with <span class="highlight">zero fees</span>. 
+                    24/7 availability, because your money never sleeps.
+                </p>
+                
+                <div class="card-footer">
+                    <a href="transfer.html" class="card-link">
                         <span>Try it now</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
+                    
+                    <div class="card-users">
+                        <div class="user-icons">
+                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <span>+2k daily</span>
+                    </div>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon bg-gradient-2">
+                <!-- Decorative elements -->
+                <div class="card-particle p1"></div>
+                <div class="card-particle p2"></div>
+            </div>
+            
+            <!-- CARD 2 - Smart Analytics (Premium) -->
+            <div class="feature-card premium-card">
+                <div class="card-glow"></div>
+                
+                <div class="card-icon-wrapper">
+                    <div class="card-icon-circle">
+                        <div class="icon-bg"></div>
                         <i class="fas fa-chart-pie"></i>
                     </div>
-                    <h3 class="feature-title">Smart Analytics</h3>
-                    <p class="feature-description">
-                        AI-powered insights into your spending patterns and savings opportunities.
-                    </p>
-                    <a href="dashboard.html" class="feature-link">
+                </div>
+                
+                <h3 class="card-title">Smart Analytics</h3>
+                
+                <!-- Mini chart visualization -->
+                <div class="chart-container">
+                    <div class="chart-bar" style="height: 40px;"></div>
+                    <div class="chart-bar" style="height: 65px;"></div>
+                    <div class="chart-bar" style="height: 25px;"></div>
+                    <div class="chart-bar" style="height: 80px;"></div>
+                    <div class="chart-bar" style="height: 55px;"></div>
+                    <div class="chart-bar" style="height: 35px;"></div>
+                    <div class="chart-bar" style="height: 70px;"></div>
+                </div>
+                
+                <p class="card-description">
+                    AI-powered insights into your spending. Know exactly where your money goes with 
+                    <span class="highlight">automatic categorization</span>.
+                </p>
+                
+                <div class="insight-tags">
+                    <span class="tag">🍕 Food</span>
+                    <span class="tag">🚗 Transport</span>
+                    <span class="tag">🛒 Shopping</span>
+                </div>
+                
+                <div class="card-footer">
+                    <a href="dashboard.html" class="card-link">
                         <span>View analytics</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
+            </div>
+            
+            <!-- CARD 3 - Biometric Security (Premium) -->
+            <div class="feature-card premium-card">
+                <div class="card-glow"></div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon bg-gradient-3">
+                <div class="card-badge-right">
+                    <span class="badge-secure">
+                        <i class="fas fa-shield-alt"></i>
+                        SECURE
+                    </span>
+                </div>
+                
+                <div class="card-icon-wrapper">
+                    <div class="card-icon-circle">
+                        <div class="icon-bg"></div>
                         <i class="fas fa-fingerprint"></i>
                     </div>
-                    <h3 class="feature-title">Biometric Security</h3>
-                    <p class="feature-description">
-                        Face ID, Touch ID, and military-grade encryption for maximum security.
-                    </p>
-                    <a href="profile.html" class="feature-link">
-                        <span>Secure account</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-card">
-                <div class="cta-content">
-                    <h2 class="cta-title">Ready to experience modern banking?</h2>
-                    <p class="cta-subtitle">
-                        Join thousands who've already transformed their financial life.
-                    </p>
-                    <a href="login.html" class="btn btn-cta btn-lg">
-                        <span>Start Free Trial</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                
+                <h3 class="card-title">Biometric Security</h3>
+                
+                <!-- Security shield animation -->
+                <div class="security-shield">
+                    <div class="shield-ring"></div>
+                    <div class="shield-ring"></div>
+                    <div class="shield-ring"></div>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <div class="cta-visual">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="app-preview">
-                                <div class="app-balance">$12,458.90</div>
-                                <div class="app-action">
-                                    <button class="app-btn">
-                                        <i class="fas fa-qrcode"></i>
-                                        Pay
-                                    </button>
-                                    <button class="app-btn">
-                                        <i class="fas fa-exchange-alt"></i>
-                                        Transfer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                
+                <p class="card-description">
+                    <span class="highlight">Military-grade encryption</span> with Face ID & Touch ID. 
+                    Your money is safer than Fort Knox.
+                </p>
+                
+                <div class="security-methods">
+                    <div class="method">
+                        <i class="fas fa-face-smile"></i>
+                        <span>Face ID</span>
+                    </div>
+                    <div class="method">
+                        <i class="fas fa-fingerprint"></i>
+                        <span>Touch ID</span>
+                    </div>
+                    <div class="method">
+                        <i class="fas fa-mobile"></i>
+                        <span>2FA</span>
                     </div>
                 </div>
+                
+                <div class="card-footer">
+                    <a href="profile.html" class="card-link">
+                        <span>Enable now</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </section>
+        
+        <!-- PREMIUM CTA SECTION -->
+        <div class="premium-cta">
+            <div class="cta-backdrop"></div>
+            
+            <div class="cta-content">
+                <div class="cta-left">
+                    <div class="cta-users">
+                        <div class="cta-avatar-stack">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User">
+                            <div class="avatar-count">2M+</div>
+                        </div>
+                        <div class="cta-users-text">
+                            <span class="users-number">2 million+</span>
+                            <span class="users-label">happy customers</span>
+                        </div>
+                    </div>
+                    
+                    <h4 class="cta-title">
+                        Join the banking <br>revolution today
+                    </h4>
+                </div>
+                
+                <div class="cta-right">
+                    <a href="login.html" class="cta-button">
+                        <span>Get Started</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <p class="cta-note">No credit card required • Free forever</p>
+                </div>
+            </div>
+            
+            <!-- Floating emojis for fun -->
+            <div class="floating-emoji emoji1">🚀</div>
+            <div class="floating-emoji emoji2">💸</div>
+            <div class="floating-emoji emoji3">🔒</div>
+            <div class="floating-emoji emoji4">⚡</div>
+        </div>
+    </div>
+</section>
+
+
+
 
     <!-- Footer -->
     <footer class="footer">
