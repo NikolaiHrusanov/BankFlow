@@ -987,18 +987,12 @@ h1, h2, h3 {
         justify-content: center;
     }
 }
-
+.theme-toggle {
+    display: none !important;
+}
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
-}
-.theme-toggle.nav-item {
-    width: 42px !important;
-    height: 42px !important;
-    padding: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .mobile-menu-btn {

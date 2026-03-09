@@ -37,24 +37,7 @@ function initThemeToggle() {
         }
     }
 
-    themeToggle.addEventListener('click', function() {
-        const html = document.documentElement;
-        const icon = this.querySelector('i');
-        
-        if (html.classList.contains('dark-theme')) {
-            html.classList.remove('dark-theme');
-            html.classList.add('light-theme');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-            localStorage.setItem('nexusbank_theme', 'light');
-        } else {
-            html.classList.remove('light-theme');
-            html.classList.add('dark-theme');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-            localStorage.setItem('nexusbank_theme', 'dark');
-        }
-    });
+    
 }
 
 // ============================================
