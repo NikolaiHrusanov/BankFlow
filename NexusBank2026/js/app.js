@@ -5,6 +5,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize core features on all pages
     initThemeToggle();
+    initMobileMenu();
+    initDropdowns();
     initPasswordToggle();
     initAuthToggle();
     initRegistration();
@@ -16,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initDashboardFeatures();
     initTransactions();
     initTransfer();
+    
+    // Initialize tooltips for tablet
+    initTooltips();
+    
+    // Handle orientation change
+    initOrientationHandler();
 });
 
 // ============================================
@@ -28,8 +36,8 @@ function initThemeToggle() {
     // Load saved theme
     const savedTheme = localStorage.getItem('nexusbank_theme');
     if (savedTheme === 'light') {
-        document.documentElement.classList.remove('dark-theme');
-        document.documentElement.classList.add('light-theme');
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme');
         const icon = themeToggle.querySelector('i');
         if (icon) {
             icon.classList.remove('fa-moon');
@@ -37,7 +45,227 @@ function initThemeToggle() {
         }
     }
 
+    // Theme toggle click handler
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        document.body.classList.toggle('light-theme');
+        
+        const icon = this.querySelector('i');
+        const isDark = document.body.classList.contains('dark-theme');
+        
+        if (isDark) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            localStorage.setItem('nexusbank_theme', 'dark');
+        } else {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            localStorage.setItem('nexusbank_theme', 'light');
+        }
+    });
+}
+
+// ============================================
+// MOBILE MENU TOGGLE
+// ============================================
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navRow = document.querySelector('.nav-row');
     
+    if (!mobileMenuBtn || !navRow) return;
+    
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navRow.classList.toggle('mobile-open');
+        const isExpanded = navRow.classList.contains('mobile-open');
+        this.setAttribute('aria-expanded', isExpanded);
+        
+        // Change icon based on menu state
+        const icon = this.querySelector('i');
+        if (isExpanded) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+            
+            // Close all dropdowns when closing menu
+            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            if (!navRow.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navRow.classList.remove('mobile-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        }
+    });
+    
+    // Close mobile menu on window resize (if switching to desktop)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            navRow.classList.remove('mobile-open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+            
+            // Close all dropdowns
+            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+    
+    // Close mobile menu when clicking on a nav link
+    navRow.querySelectorAll('.nav-item, .dropdown-link, .plan-link, .compare-link, .feature-link').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                navRow.classList.remove('mobile-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+}
+
+// ============================================
+// MOBILE DROPDOWN HANDLING
+// ============================================
+function initDropdowns() {
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Only on mobile
+            if (window.innerWidth <= 768) {
+                const dropdown = this.closest('.nav-dropdown');
+                
+                // Close other dropdowns
+                dropdownToggles.forEach(otherToggle => {
+                    const otherDropdown = otherToggle.closest('.nav-dropdown');
+                    if (otherDropdown !== dropdown && otherDropdown) {
+                        otherDropdown.classList.remove('active');
+                        
+                        // Reset chevron rotation
+                        const otherArrow = otherToggle.querySelector('.dropdown-arrow');
+                        if (otherArrow) {
+                            otherArrow.style.transform = '';
+                        }
+                    }
+                });
+                
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+                
+                // Rotate chevron
+                const arrow = this.querySelector('.dropdown-arrow');
+                if (arrow) {
+                    if (dropdown.classList.contains('active')) {
+                        arrow.style.transform = 'rotate(180deg)';
+                    } else {
+                        arrow.style.transform = '';
+                    }
+                }
+            }
+        });
+    });
+    
+    // Close dropdowns when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            if (!e.target.closest('.nav-dropdown')) {
+                document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    
+                    // Reset all chevrons
+                    dropdown.querySelectorAll('.dropdown-arrow').forEach(arrow => {
+                        arrow.style.transform = '';
+                    });
+                });
+            }
+        }
+    });
+}
+
+// ============================================
+// TOOLTIPS FOR TABLET NAVIGATION
+// ============================================
+function initTooltips() {
+    function setupTooltips() {
+        if (window.innerWidth <= 1024 && window.innerWidth > 768) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const span = item.querySelector('span');
+                if (span && span.textContent && !item.classList.contains('btn-primary') && !item.classList.contains('btn-ghost')) {
+                    item.setAttribute('data-tooltip', span.textContent);
+                }
+            });
+        } else {
+            // Remove tooltips on other screen sizes
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.removeAttribute('data-tooltip');
+            });
+        }
+    }
+    
+    // Initial setup
+    setupTooltips();
+    
+    // Update on resize
+    window.addEventListener('resize', function() {
+        setupTooltips();
+    });
+}
+
+// ============================================
+// ORIENTATION CHANGE HANDLER
+// ============================================
+function initOrientationHandler() {
+    window.addEventListener('orientationchange', function() {
+        // Close mobile menu on orientation change
+        const navRow = document.querySelector('.nav-row');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        if (navRow && mobileMenuBtn) {
+            navRow.classList.remove('mobile-open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            document.body.style.overflow = '';
+        }
+        
+        // Close all dropdowns
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
+            dropdown.querySelectorAll('.dropdown-arrow').forEach(arrow => {
+                arrow.style.transform = '';
+            });
+        });
+        
+        // Reinitialize tooltips after orientation change
+        setTimeout(initTooltips, 100);
+    });
 }
 
 // ============================================
@@ -98,16 +326,135 @@ function initRegistration() {
     const registerForm = document.getElementById('registerForm');
     if (!registerForm) return;
 
-    // ... (keep all your existing registration code here) ...
-    // Copy the entire registration function from your original app.js
-    // I'm not repeating it here to save space, but keep all the registration code
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('regName')?.value;
+        const email = document.getElementById('regEmail')?.value;
+        const password = document.getElementById('regPassword')?.value;
+        const confirmPassword = document.getElementById('regConfirmPassword')?.value;
+        const terms = document.getElementById('terms')?.checked;
+        
+        // Validation
+        if (!name || !email || !password || !confirmPassword) {
+            showNotification('Please fill in all fields', 'error');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showNotification('Passwords do not match', 'error');
+            return;
+        }
+        
+        if (password.length < 8) {
+            showNotification('Password must be at least 8 characters', 'error');
+            return;
+        }
+        
+        if (!terms) {
+            showNotification('You must agree to the terms and conditions', 'error');
+            return;
+        }
+        
+        // Check if user already exists
+        const users = JSON.parse(localStorage.getItem('nexusbank_users')) || [];
+        const existingUser = users.find(u => u.email === email);
+        
+        if (existingUser) {
+            showNotification('Email already registered', 'error');
+            return;
+        }
+        
+        // Create new user
+        const newUser = {
+            id: Date.now().toString(),
+            name: name,
+            email: email,
+            password: btoa(password), // Simple encoding (use proper encryption in production)
+            createdAt: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('nexusbank_users', JSON.stringify(users));
+        
+        // Create default accounts for user
+        const accounts = [
+            {
+                id: 1,
+                number: 'GB' + Math.floor(Math.random() * 10000000000),
+                type: 'Current Account',
+                balance: 1000,
+                currency: 'GBP'
+            },
+            {
+                id: 2,
+                number: 'GB' + Math.floor(Math.random() * 10000000000),
+                type: 'Savings Account',
+                balance: 5000,
+                currency: 'GBP'
+            }
+        ];
+        
+        localStorage.setItem(`nexusbank_accounts_${newUser.id}`, JSON.stringify(accounts));
+        localStorage.setItem(`nexusbank_transactions_${newUser.id}`, JSON.stringify([]));
+        
+        showNotification('Registration successful! Please login.', 'success');
+        
+        // Switch to login form after 2 seconds
+        setTimeout(() => {
+            const showLoginBtn = document.getElementById('showLoginBtn');
+            if (showLoginBtn) showLoginBtn.click();
+            registerForm.reset();
+        }, 2000);
+    });
+}
+
+// ============================================
+// SHOW NOTIFICATION
+// ============================================
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    switch(type) {
+        case 'success':
+            notification.style.backgroundColor = '#10b981';
+            break;
+        case 'error':
+            notification.style.backgroundColor = '#ef4444';
+            break;
+        default:
+            notification.style.backgroundColor = '#3b82f6';
+    }
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
 }
 
 // ============================================
 // PROTECT ROUTES – REDIRECT IF NOT LOGGED IN
 // ============================================
 function protectRoutes() {
-   const protectedPages = [];
+    const protectedPages = ['dashboard.html', 'accounts.html', 'transfer.html', 'transactions.html', 'profile.html'];
     const currentPage = window.location.pathname.split('/').pop();
 
     if (protectedPages.includes(currentPage)) {
@@ -145,7 +492,7 @@ function initSessionTimeout() {
     }
 
     function logout() {
-        const protectedPages = ['dashboard.html', 'accounts.html', 'transfer.html', 'transactions.html'];
+        const protectedPages = ['dashboard.html', 'accounts.html', 'transfer.html', 'transactions.html', 'profile.html'];
         const currentPage = window.location.pathname.split('/').pop();
         
         if (protectedPages.includes(currentPage)) {
@@ -175,12 +522,19 @@ function initSessionTimeout() {
         }
     }
 
-    // Events that reset the timer
-    window.addEventListener('load', resetTimer);
-    window.addEventListener('mousemove', resetTimer);
-    window.addEventListener('keypress', resetTimer);
-    window.addEventListener('scroll', resetTimer);
-    window.addEventListener('click', resetTimer);
+    // Only start timer on protected pages
+    const protectedPages = ['dashboard.html', 'accounts.html', 'transfer.html', 'transactions.html', 'profile.html'];
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if (protectedPages.includes(currentPage)) {
+        // Events that reset the timer
+        window.addEventListener('load', resetTimer);
+        window.addEventListener('mousemove', resetTimer);
+        window.addEventListener('keypress', resetTimer);
+        window.addEventListener('scroll', resetTimer);
+        window.addEventListener('click', resetTimer);
+        window.addEventListener('touchstart', resetTimer); // Mobile support
+    }
 }
 
 // ============================================
@@ -196,8 +550,13 @@ function initLogout() {
             localStorage.removeItem('nexusbank_current_user');
             sessionStorage.removeItem('nexusbank_current_user');
             
+            // Show logout message
+            showNotification('Logged out successfully', 'success');
+            
             // Redirect to login
-            window.location.href = 'login.html';
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
         });
     }
 }
@@ -229,6 +588,10 @@ function loadDashboardData() {
         // Load user's accounts data
         const accounts = JSON.parse(localStorage.getItem(`nexusbank_accounts_${user.id}`)) || [];
         updateAccountsDisplay(accounts);
+        
+        // Load recent transactions
+        const transactions = JSON.parse(localStorage.getItem(`nexusbank_transactions_${user.id}`)) || [];
+        updateRecentTransactions(transactions);
     }
 }
 
@@ -241,8 +604,34 @@ function updateAccountsDisplay(accounts) {
                 <div class="account-type">${account.type}</div>
                 <div class="account-number">${account.number}</div>
                 <div class="account-balance">$${account.balance.toLocaleString()}</div>
+                <div class="account-currency">${account.currency}</div>
             </div>
         `).join('');
+    }
+}
+
+function updateRecentTransactions(transactions) {
+    const transactionsList = document.getElementById('recentTransactions');
+    if (transactionsList) {
+        const recent = transactions.slice(0, 5);
+        if (recent.length === 0) {
+            transactionsList.innerHTML = '<p class="no-data">No recent transactions</p>';
+        } else {
+            transactionsList.innerHTML = recent.map(t => `
+                <div class="transaction-item">
+                    <div class="transaction-icon">
+                        <i class="fas ${t.type === 'credit' ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-name">${t.description}</div>
+                        <div class="transaction-date">${new Date(t.date).toLocaleDateString()}</div>
+                    </div>
+                    <div class="transaction-amount ${t.type}">
+                        ${t.type === 'credit' ? '+' : '-'}$${t.amount}
+                    </div>
+                </div>
+            `).join('');
+        }
     }
 }
 
@@ -251,6 +640,7 @@ function initDashboardCharts() {
     const spendingChart = document.getElementById('spendingChart');
     if (spendingChart) {
         // Chart initialization code here
+        // You can use Chart.js or any other library
     }
 }
 
@@ -281,10 +671,17 @@ function displayTransactions(transactions) {
             transactionsList.innerHTML = '<p class="no-data">No transactions found.</p>';
         } else {
             transactionsList.innerHTML = transactions.map(t => `
-                <div class="transaction-item ${t.type}">
-                    <div class="transaction-date">${new Date(t.date).toLocaleDateString()}</div>
-                    <div class="transaction-description">${t.description}</div>
-                    <div class="transaction-amount">${t.type === 'credit' ? '+' : '-'}$${t.amount}</div>
+                <div class="transaction-item">
+                    <div class="transaction-icon">
+                        <i class="fas ${t.type === 'credit' ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-name">${t.description}</div>
+                        <div class="transaction-date">${new Date(t.date).toLocaleDateString()}</div>
+                    </div>
+                    <div class="transaction-amount ${t.type}">
+                        ${t.type === 'credit' ? '+' : '-'}$${t.amount}
+                    </div>
                 </div>
             `).join('');
         }
@@ -319,18 +716,18 @@ function initTransfer() {
 function handleTransfer(e) {
     e.preventDefault();
     
-    const fromAccount = document.getElementById('fromAccount').value;
-    const toAccount = document.getElementById('toAccount').value;
-    const amount = parseFloat(document.getElementById('amount').value);
-    const description = document.getElementById('description').value;
+    const fromAccount = document.getElementById('fromAccount')?.value;
+    const toAccount = document.getElementById('toAccount')?.value;
+    const amount = parseFloat(document.getElementById('amount')?.value);
+    const description = document.getElementById('description')?.value;
     
     if (!fromAccount || !toAccount || !amount || amount <= 0) {
-        alert('Please fill all fields correctly.');
+        showNotification('Please fill all fields correctly.', 'error');
         return;
     }
     
     if (fromAccount === toAccount) {
-        alert('Cannot transfer to the same account.');
+        showNotification('Cannot transfer to the same account.', 'error');
         return;
     }
     
@@ -360,10 +757,15 @@ function handleTransfer(e) {
             localStorage.setItem(`nexusbank_accounts_${user.id}`, JSON.stringify(accounts));
             localStorage.setItem(`nexusbank_transactions_${user.id}`, JSON.stringify(transactions));
             
-            alert('Transfer completed successfully!');
-            window.location.reload();
+            showNotification('Transfer completed successfully!', 'success');
+            
+            // Reload accounts after 2 seconds
+            setTimeout(() => {
+                loadAccountsForTransfer();
+                loadDashboardData();
+            }, 2000);
         } else {
-            alert('Insufficient funds.');
+            showNotification('Insufficient funds.', 'error');
         }
     }
 }
@@ -406,11 +808,67 @@ style.textContent = `
         }
     }
     
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
     .no-data {
         text-align: center;
-        color: #666;
+        color: var(--text-tertiary);
         padding: 40px;
         font-style: italic;
     }
+    
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .notification.success {
+        background: var(--success);
+    }
+    
+    .notification.error {
+        background: var(--error);
+    }
+    
+    .notification.info {
+        background: var(--info);
+    }
+    
+    /* Mobile touch optimizations */
+    @media (max-width: 768px) {
+        .nav-item,
+        .dropdown-link,
+        .plan-link,
+        .compare-link,
+        .feature-link,
+        .btn {
+            -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+        }
+        
+        .notification {
+            left: 20px;
+            right: 20px;
+            width: auto;
+            text-align: center;
+        }
+    }
 `;
+
 document.head.appendChild(style);

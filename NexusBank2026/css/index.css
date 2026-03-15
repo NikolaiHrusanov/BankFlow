@@ -3,6 +3,33 @@
 /* ===== FONT IMPORT ===== */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
+/* Ensure Font Awesome icons always display properly */
+.fas, .far, .fab, .fa {
+    font-family: 'Font Awesome 6 Free' !important;
+    display: inline-block !important;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.fab {
+    font-family: 'Font Awesome 6 Brands' !important;
+}
+
+.fa-chevron-down, 
+.fa-arrow-right, 
+.fa-arrow-up,
+.fa-moon,
+.fa-sun {
+    /* These should always be visible */
+    display: inline-block !important;
+}
+
+/* Fix for any generic i tags that might be overriding */
+i {
+    font-style: normal;
+}
 /* ===== GLOBAL TYPOGRAPHY OVERRIDE ===== */
 :root {
     --transition-bounce: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -2343,22 +2370,72 @@ button:focus-visible {
     }
 }
 
-@media (max-width: 1024px) {
+/* Tablet styles - icons with text for better UX */
+@media (min-width: 769px) and (max-width: 1024px) {
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    /* Keep text visible on tablet - just make it smaller */
+    .nav-item {
+        padding: 0.5rem 0.8rem !important;
+        font-size: 0.9rem !important;
+    }
+    
     .nav-item span {
-        display: none;
+        display: inline-block;
+        max-width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .nav-item i {
-        font-size: 1.125rem;
+        font-size: 1rem !important;
     }
     
-    .nav-item.btn-primary span {
+    .nav-spacer {
+        margin: 0 0.25rem;
+    }
+}
+
+/* Mobile styles - hide text, show only icons */
+@media (max-width: 768px) {
+    .floating-nav {
+        height: 75px !important;
+        top: 10px;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    /* Only in mobile menu, hide text for non-critical items */
+    .nav-row .nav-item:not(.btn-primary) span:not(.badge-text):not(.plan-name) {
         display: none;
     }
+    
+    .nav-row .nav-item i {
+        font-size: 1.125rem;
+        margin-right: 0;
+    }
+    
+    /* Keep text visible in mobile menu for better UX */
+    .nav-row.mobile-open .nav-item span {
+        display: inline-block !important;
+    }
+    
+    /* Keep button text visible */
+    .nav-item.btn-primary span {
+        display: inline-block !important;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 6rem 0 3rem;
+    }
+    
+    /* Rest of your existing mobile styles... */
 }
 
 @media (max-width: 768px) {

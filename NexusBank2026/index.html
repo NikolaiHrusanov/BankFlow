@@ -3,20 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusBank | Modern Digital Banking</title>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; img-src 'self' data: https://randomuser.me;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- SEO Meta Tags -->
+    <title>NexusBank | Modern Digital Banking for Personal, Business & Kids</title>
+    <meta name="description" content="NexusBank - Modern digital banking for everyone. Personal accounts, business banking, kids & teens accounts, and company solutions. Zero fees, instant transfers, bank-level security.">
+    <meta name="keywords" content="digital banking, online bank, personal account, business banking, kids banking, instant transfers, cryptocurrency, investments">
+    <meta name="author" content="NexusBank">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="NexusBank | Modern Digital Banking">
+    <meta property="og:description" content="Banking reimagined for the digital age. Personal, Business, Kids & Teens, and Company solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/og-preview.jpg">
+    <meta property="og:site_name" content="NexusBank">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NexusBank | Modern Digital Banking">
+    <meta name="twitter:description" content="Banking reimagined for the digital age. Zero fees. Maximum security.">
+    <meta name="twitter:image" content="images/twitter-preview.jpg">
+    
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="js/app.js"></script>
-    <script src="js/index.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-theme">
 
-    <!-- Floating Navigation -->
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Floating Navigation with Mega Menus -->
     <nav class="floating-nav">
         <div class="container">
             <a href="index.html" class="nav-brand">
@@ -24,441 +58,1025 @@
             </a>
 
             <div class="nav-row">
-                <a href="index.html" class="nav-item active">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
-                <a href="#features" class="nav-item">
-                    <i class="fas fa-star"></i>
-                    <span>Features</span>
-                </a>
-                <a href="#pricing" class="nav-item">
-                    <i class="fas fa-tag"></i>
-                    <span>Pricing</span>
-                </a>
-                
+                <!-- Personal Dropdown - Mega Menu -->
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-item dropdown-toggle">
+                        <i class="fas fa-user"></i>
+                        <span>Personal</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu personal-menu">
+                        <div class="dropdown-grid">
+                            <!-- Column 1 - Discover -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Discover NexusBank</span>
+                                </div>
+                                <a href="personal/accounts.html" class="dropdown-link">
+                                    <span>Accounts</span>
+                                </a>
+                                <a href="personal/bank-account.html" class="dropdown-link">
+                                    <span>Bank Account</span>
+                                </a>
+                                <a href="personal/joint-account.html" class="dropdown-link">
+                                    <span>Joint Account</span>
+                                </a>
+                                <a href="personal/professional-account.html" class="dropdown-link">
+                                    <span>Professional Account</span>
+                                </a>
+                                <a href="personal/parents-guardians.html" class="dropdown-link">
+                                    <span>Parents and guardians</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 2 - Savings & Funds -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Savings & Funds</span>
+                                </div>
+                                <a href="personal/flexible-cash-funds.html" class="dropdown-link">
+                                    <span>Flexible Cash Funds</span>
+                                </a>
+                                <a href="personal/smart-spending.html" class="dropdown-link">
+                                    <span>Smart Spending</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Cards</span>
+                                </div>
+                                <a href="personal/send-receive.html" class="dropdown-link">
+                                    <span>Send & Receive</span>
+                                </a>
+                                <a href="personal/nexus-pay.html" class="dropdown-link">
+                                    <span>NexusBank Pay</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Money Management</span>
+                                </div>
+                                <a href="personal/nexus-points.html" class="dropdown-link">
+                                    <span>NexusPoints</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 3 - Security -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Security & Protection</span>
+                                </div>
+                                <a href="security/how-we-protect.html" class="dropdown-link">
+                                    <span>How We Protect Your Money</span>
+                                </a>
+                                <a href="security/report-lost-device.html" class="dropdown-link">
+                                    <span>Report Lost Device</span>
+                                </a>
+                                <a href="security/fraud-scams.html" class="dropdown-link">
+                                    <span>Learn About Fraud & Scams</span>
+                                </a>
+                                <a href="security/insight-report.html" class="dropdown-link">
+                                    <span>Consumer Security Insight Report</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 4 - Investments -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Investments</span>
+                                </div>
+                                <a href="investments/stocks.html" class="dropdown-link">
+                                    <span>Stocks</span>
+                                </a>
+                                <a href="investments/robo-advisor.html" class="dropdown-link">
+                                    <span>Robo-Advisor</span>
+                                </a>
+                                <a href="investments/etfs.html" class="dropdown-link">
+                                    <span>ETFs</span>
+                                </a>
+                                <a href="investments/bonds.html" class="dropdown-link">
+                                    <span>Bonds</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Crypto</span>
+                                </div>
+                                <a href="crypto/crypto.html" class="dropdown-link">
+                                    <span>Crypto</span>
+                                </a>
+                                <a href="crypto/ramp.html" class="dropdown-link">
+                                    <span>NexusBank Ramp</span>
+                                </a>
+                                <a href="crypto/exchange.html" class="dropdown-link">
+                                    <span>NexusBank X</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 5 - Mobile & Help -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Mobile & Connectivity</span>
+                                </div>
+                                <a href="mobile/data-plans.html" class="dropdown-link">
+                                    <span>Data Plans</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Global Finances</span>
+                                </div>
+                                <a href="global/international-transfers.html" class="dropdown-link">
+                                    <span>International Transfers</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Help</span>
+                                </div>
+                                <a href="help/contact.html" class="dropdown-link">
+                                    <span>Contact Us</span>
+                                </a>
+                                <a href="help/centre.html" class="dropdown-link">
+                                    <span>Help Centre</span>
+                                </a>
+                                <a href="help/system-status.html" class="dropdown-link">
+                                    <span>System Status</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 6 - Plans -->
+                            <div class="dropdown-col plans-col">
+                                <div class="dropdown-section-header">
+                                    <span>Plans</span>
+                                </div>
+                                <a href="plans/standard.html" class="plan-link">
+                                    <span class="plan-name">Standard</span>
+                                    <span class="plan-price">Free</span>
+                                </a>
+                                <a href="plans/plus.html" class="plan-link">
+                                    <span class="plan-name">Plus</span>
+                                    <span class="plan-price">£3.99/mo</span>
+                                </a>
+                                <a href="plans/premium.html" class="plan-link">
+                                    <span class="plan-name">Premium</span>
+                                    <span class="plan-price">£6.99/mo</span>
+                                </a>
+                                <a href="plans/metal.html" class="plan-link metal">
+                                    <span class="plan-name">Metal</span>
+                                    <span class="plan-price">£14.99/mo</span>
+                                </a>
+                                <a href="plans/ultra.html" class="plan-link ultra">
+                                    <span class="plan-name">Ultra</span>
+                                    <span class="plan-price">£45/mo</span>
+                                </a>
+                                <a href="plans/compare.html" class="compare-link">
+                                    <span>Compare Plans</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Dropdown - Mega Menu -->
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-item dropdown-toggle">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Business</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu business-menu">
+                        <div class="dropdown-grid">
+                            <!-- Column 1 - Daily Banking -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Discover NexusBank Business</span>
+                                </div>
+                                
+                                <div class="dropdown-section-header mt-2">
+                                    <span>Daily Banking</span>
+                                </div>
+                                <a href="business/multi-currency-account.html" class="dropdown-link">
+                                    <span>Multi-Currency Account</span>
+                                </a>
+                                <a href="business/expense-management.html" class="dropdown-link">
+                                    <span>Expense Management</span>
+                                </a>
+                                <a href="business/corporate-cards.html" class="dropdown-link">
+                                    <span>Corporate Cards</span>
+                                </a>
+                                <a href="business/money-transfers.html" class="dropdown-link">
+                                    <span>Money Transfers</span>
+                                </a>
+                                <a href="business/bills.html" class="dropdown-link">
+                                    <span>Bills</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 2 - Treasury -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Treasury</span>
+                                </div>
+                                <a href="business/currency-exchange.html" class="dropdown-link">
+                                    <span>Currency Exchange</span>
+                                </a>
+                                <a href="business/savings.html" class="dropdown-link">
+                                    <span>Savings</span>
+                                </a>
+                                <a href="business/flexible-cash-funds.html" class="dropdown-link">
+                                    <span>Flexible Cash Funds</span>
+                                </a>
+                                <a href="business/crypto.html" class="dropdown-link">
+                                    <span>Crypto</span>
+                                </a>
+                                <a href="business/fx-forwards.html" class="dropdown-link">
+                                    <span>FX Forwards</span>
+                                </a>
+                                <a href="business/nexus-x.html" class="dropdown-link">
+                                    <span>NexusBank X</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 3 - Accept Payments -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Accept payments</span>
+                                </div>
+                                <a href="business/accept-payments.html" class="dropdown-link">
+                                    <span>Accept Payments</span>
+                                </a>
+                                <a href="business/in-person-payments.html" class="dropdown-link">
+                                    <span>In-person Payments</span>
+                                </a>
+                                <a href="business/online-payments.html" class="dropdown-link">
+                                    <span>Online Payments</span>
+                                </a>
+                                <a href="business/nexus-pay.html" class="dropdown-link">
+                                    <span>NexusBank Pay</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Platform</span>
+                                </div>
+                                <a href="business/analytics.html" class="dropdown-link">
+                                    <span>Analytics</span>
+                                </a>
+                                <a href="business/apis.html" class="dropdown-link">
+                                    <span>Business APIs</span>
+                                </a>
+                                <a href="business/integrations.html" class="dropdown-link">
+                                    <span>Integrations</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 4 - Rewards & Solutions -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Rewards</span>
+                                </div>
+                                <a href="business/nexus-people.html" class="dropdown-link">
+                                    <span>NexusBank People</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Platform</span>
+                                </div>
+                                <a href="business/performance.html" class="dropdown-link">
+                                    <span>Performance</span>
+                                </a>
+                                <a href="business/recruitment.html" class="dropdown-link">
+                                    <span>Recruitment</span>
+                                </a>
+                                <a href="business/hr.html" class="dropdown-link">
+                                    <span>HR</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Solutions</span>
+                                </div>
+                                <a href="solutions/travel.html" class="dropdown-link">
+                                    <span>Travel</span>
+                                </a>
+                                <a href="solutions/ecommerce.html" class="dropdown-link">
+                                    <span>Ecommerce</span>
+                                </a>
+                                <a href="solutions/marketing.html" class="dropdown-link">
+                                    <span>Marketing agencies</span>
+                                </a>
+                                <a href="solutions/technology.html" class="dropdown-link">
+                                    <span>Technology & AI</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 5 - Help & Resources -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Help & Resources</span>
+                                </div>
+                                <a href="business/help.html" class="dropdown-link">
+                                    <span>Customer Help</span>
+                                </a>
+                                <a href="business/customer-stories.html" class="dropdown-link">
+                                    <span>Customer Stories</span>
+                                </a>
+                                <a href="business/resources.html" class="dropdown-link">
+                                    <span>Business Resources</span>
+                                </a>
+                                <a href="security/how-we-protect.html" class="dropdown-link">
+                                    <span>How we protect your money</span>
+                                </a>
+                                <a href="help/system-status.html" class="dropdown-link">
+                                    <span>System Status</span>
+                                </a>
+                                <a href="security/fraud-scams.html" class="dropdown-link">
+                                    <span>Learn About Fraud & Scams</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>What's New</span>
+                                </div>
+                                <a href="whats-new/index.html" class="dropdown-link">
+                                    <span>What's New</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 6 - Plans -->
+                            <div class="dropdown-col plans-col">
+                                <div class="dropdown-section-header">
+                                    <span>Plans</span>
+                                </div>
+                                <a href="business/pricing.html" class="plan-link">
+                                    <span class="plan-name">Business Account Pricing</span>
+                                </a>
+                                <a href="business/payment-pricing.html" class="plan-link">
+                                    <span class="plan-name">Payment Acceptance Pricing</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids & Teens Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-item dropdown-toggle">
+                        <i class="fas fa-child"></i>
+                        <span>Kids & Teens</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu kids-menu">
+                        <div class="dropdown-grid single-row">
+                            <div class="dropdown-col">
+                                <a href="kids-teens/account.html" class="feature-link">
+                                    <div>
+                                        <div class="feature-title">Kids & Teens account</div>
+                                        <div class="feature-desc">For ages 6-17</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a href="kids-teens/parents.html" class="feature-link">
+                                    <div>
+                                        <div class="feature-title">Parents and guardians</div>
+                                        <div class="feature-desc">Manage and monitor</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a href="help/centre.html" class="feature-link">
+                                    <div>
+                                        <div class="feature-title">Help Center</div>
+                                        <div class="feature-desc">Get support</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-item dropdown-toggle">
+                        <i class="fas fa-building"></i>
+                        <span>Company</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu company-menu">
+                        <div class="dropdown-grid two-columns">
+                            <!-- Column 1 - General -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>General</span>
+                                </div>
+                                <a href="company/about.html" class="dropdown-link">
+                                    <span>About Us</span>
+                                </a>
+                                <a href="company/blog.html" class="dropdown-link">
+                                    <span>Blog</span>
+                                </a>
+                                <a href="company/news.html" class="dropdown-link">
+                                    <span>News & Media</span>
+                                </a>
+                                <a href="company/reviews.html" class="dropdown-link">
+                                    <span>NexusBank Reviews</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 2 - Careers -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Careers</span>
+                                </div>
+                                <a href="careers/index.html" class="dropdown-link">
+                                    <span>Careers</span>
+                                </a>
+                                <a href="careers/working.html" class="dropdown-link">
+                                    <span>Working at NexusBank</span>
+                                </a>
+                                <a href="careers/culture.html" class="dropdown-link">
+                                    <span>Culture</span>
+                                </a>
+                                <a href="careers/diversity.html" class="dropdown-link">
+                                    <span>Diversity & Inclusion</span>
+                                </a>
+                                <a href="careers/relocation.html" class="dropdown-link">
+                                    <span>Relocation with NexusBank</span>
+                                </a>
+                                
+                                <div class="dropdown-section-header mt-3">
+                                    <span>Talent Programmes</span>
+                                </div>
+                                <a href="careers/stem-champions.html" class="dropdown-link">
+                                    <span>Talent Programmes STEM Champions</span>
+                                </a>
+                            </div>
+
+                            <!-- Column 3 - Shareholder Relations -->
+                            <div class="dropdown-col">
+                                <div class="dropdown-section-header">
+                                    <span>Shareholder Relations</span>
+                                </div>
+                                <a href="investors/annual-report-2024.html" class="dropdown-link">
+                                    <span>Annual Report 2024</span>
+                                </a>
+                                <a href="investors/reports.html" class="dropdown-link">
+                                    <span>Reports and results</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="nav-spacer"></div>
-                
+
+                <a href="login.html?tab=register" class="nav-item btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Register</span>
+                </a>
                 <a href="login.html" class="nav-item btn-ghost">
                     <i class="fas fa-sign-in-alt"></i>
                     <span>Sign In</span>
                 </a>
-                <a href="login.html" class="nav-item btn-primary">
-                    <span>Get Started</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
                 
-                <button class="theme-toggle nav-item" id="themeToggle">
+                <button class="theme-toggle nav-item" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge">
-                        <i class="fas fa-shield-alt"></i>
-                        Bank-Level Security
-                    </span>
-                </div>
-                <h1 class="hero-title">
-                    Banking reimagined for the
-                    <span class="gradient-text">digital age</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Manage, invest, and grow your wealth with our intelligent banking platform.
-                    Zero fees. Maximum security. Beautiful design.
-                </p>
-                <div class="hero-actions">
-                    <a href="login.html" class="btn btn-primary btn-lg">
-                        <span>Open Free Account</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#features" class="btn btn-outline btn-lg">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Watch Demo</span>
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">2M+</div>
-                        <div class="stat-label">Happy Users</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">99.9%</div>
-                        <div class="stat-label">Uptime</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">$50B+</div>
-                        <div class="stat-label">Assets Managed</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="dashboard-preview">
-                    <div class="preview-card preview-card-1">
-                        <div class="preview-header">
-                            <div class="preview-title">Total Balance</div>
-                            <div class="preview-badge">Live</div>
-                        </div>
-                        <div class="preview-balance">$24,589.50</div>
-                        <div class="preview-trend">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+12.5% this month</span>
-                        </div>
-                    </div>
-                    <div class="preview-card preview-card-2">
-                        <div class="preview-transaction">
-                            <div class="transaction-icon">
-                                <i class="fas fa-shopping-bag"></i>
-                            </div>
-                            <div class="transaction-details">
-                                <div class="transaction-name">Apple Store</div>
-                                <div class="transaction-time">Today • 2:45 PM</div>
-                            </div>
-                            <div class="transaction-amount negative">-$299.99</div>
-                        </div>
-                        <div class="preview-transaction">
-                            <div class="transaction-icon">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-                            <div class="transaction-details">
-                                <div class="transaction-name">Salary Deposit</div>
-                                <div class="transaction-time">Yesterday • 9:00 AM</div>
-                            </div>
-                            <div class="transaction-amount positive">+$4,500.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main id="main-content">
 
-    <!-- Features Section - Revolut Style -->
-    <!-- Features Section -->
-<!-- Features Section - Premium Design -->
-<section class="features-section" id="features">
-    <div class="container">
-        <!-- Section Header with animated gradient -->
-        <div class="section-header">
-            <div class="section-badge-wrapper">
-                <span class="section-badge">
-                    <i class="fas fa-bolt"></i>
-                    <span>Why choose us</span>
-                </span>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            Bank-Level Security
+                        </span>
+                    </div>
+                    <h1 class="hero-title">
+                        Banking reimagined for the
+                        <span class="gradient-text">digital age</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Manage, invest, and grow your wealth with our intelligent banking platform.
+                        Zero fees. Maximum security. Beautiful design. For everyone.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="register.html" class="btn btn-primary btn-lg">
+                            <span>Open Free Account</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#features" class="btn btn-outline btn-lg">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Watch Demo</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">2M+</div>
+                            <div class="stat-label">Happy Users</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">$50B+</div>
+                            <div class="stat-label">Assets Managed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+                        <div class="preview-card preview-card-1">
+                            <div class="preview-header">
+                                <div class="preview-title">Total Balance</div>
+                                <div class="preview-badge">Live</div>
+                            </div>
+                            <div class="preview-balance">$24,589.50</div>
+                            <div class="preview-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12.5% this month</span>
+                            </div>
+                        </div>
+                        <div class="preview-card preview-card-2">
+                            <div class="preview-transaction">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <div class="transaction-name">Apple Store</div>
+                                    <div class="transaction-time">Today • 2:45 PM</div>
+                                </div>
+                                <div class="transaction-amount negative">-$299.99</div>
+                            </div>
+                            <div class="preview-transaction">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <div class="transaction-name">Salary Deposit</div>
+                                    <div class="transaction-time">Yesterday • 9:00 AM</div>
+                                </div>
+                                <div class="transaction-amount positive">+$4,500.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <h2 class="section-title">
-                Banking that actually
-                <span class="gradient-text">feels good</span>
-            </h2>
-            
-            <p class="section-subtitle">
-                Stop settling for boring banking. Experience the future of finance with features 
-                designed to make you smile.
-            </p>
-        </div>
-        
-        <!-- Features Grid - Premium Cards -->
-        <div class="features-grid">
-            
-            <!-- CARD 1 - Instant Transfers (Premium) -->
-            <div class="feature-card premium-card">
-                <div class="card-glow"></div>
-                
-                <div class="card-badge">
-                    <span class="badge-new">🔥 HOT</span>
-                </div>
-                
-                <div class="card-icon-wrapper">
-                    <div class="card-icon-circle">
-                        <div class="icon-bg"></div>
-                        <i class="fas fa-bolt"></i>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <div class="section-badge-wrapper">
+                        <span class="section-badge">
+                            <i class="fas fa-bolt"></i>
+                            <span>Why choose us</span>
+                        </span>
                     </div>
-                </div>
-                
-                <h3 class="card-title">Instant Transfers</h3>
-                
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <span class="stat-value">0.1<span class="stat-unit">s</span></span>
-                        <span class="stat-label">Transfer time</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-value">100<span class="stat-unit">+</span></span>
-                        <span class="stat-label">Countries</span>
-                    </div>
-                </div>
-                
-                <p class="card-description">
-                    Send money anywhere in seconds with <span class="highlight">zero fees</span>. 
-                    24/7 availability, because your money never sleeps.
-                </p>
-                
-                <div class="card-footer">
-                    <a href="transfer.html" class="card-link">
-                        <span>Try it now</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
                     
-                    <div class="card-users">
-                        <div class="user-icons">
-                            <i class="fas fa-circle"></i>
-                            <i class="fas fa-circle"></i>
-                            <i class="fas fa-circle"></i>
+                    <h2 class="section-title">
+                        Banking that actually
+                        <span class="gradient-text">feels good</span>
+                    </h2>
+                    
+                    <p class="section-subtitle">
+                        Stop settling for boring banking. Experience the future of finance with features 
+                        designed to make you smile.
+                    </p>
+                </div>
+                
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    
+                    <!-- CARD 1 - Instant Transfers -->
+                    <div class="feature-card premium-card">
+                        <div class="card-glow"></div>
+                        
+                        <div class="card-badge">
+                            <span class="badge-new">🔥 HOT</span>
                         </div>
-                        <span>+2k daily</span>
-                    </div>
-                </div>
-                
-                <!-- Decorative elements -->
-                <div class="card-particle p1"></div>
-                <div class="card-particle p2"></div>
-            </div>
-            
-            <!-- CARD 2 - Smart Analytics (Premium) -->
-            <div class="feature-card premium-card">
-                <div class="card-glow"></div>
-                
-                <div class="card-icon-wrapper">
-                    <div class="card-icon-circle">
-                        <div class="icon-bg"></div>
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                </div>
-                
-                <h3 class="card-title">Smart Analytics</h3>
-                
-                <!-- Mini chart visualization -->
-                <div class="chart-container">
-                    <div class="chart-bar" style="height: 40px;"></div>
-                    <div class="chart-bar" style="height: 65px;"></div>
-                    <div class="chart-bar" style="height: 25px;"></div>
-                    <div class="chart-bar" style="height: 80px;"></div>
-                    <div class="chart-bar" style="height: 55px;"></div>
-                    <div class="chart-bar" style="height: 35px;"></div>
-                    <div class="chart-bar" style="height: 70px;"></div>
-                </div>
-                
-                <p class="card-description">
-                    AI-powered insights into your spending. Know exactly where your money goes with 
-                    <span class="highlight">automatic categorization</span>.
-                </p>
-                
-                <div class="insight-tags">
-                    <span class="tag">🍕 Food</span>
-                    <span class="tag">🚗 Transport</span>
-                    <span class="tag">🛒 Shopping</span>
-                </div>
-                
-                <div class="card-footer">
-                    <a href="dashboard.html" class="card-link">
-                        <span>View analytics</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- CARD 3 - Biometric Security (Premium) -->
-            <div class="feature-card premium-card">
-                <div class="card-glow"></div>
-                
-                <div class="card-badge-right">
-                    <span class="badge-secure">
-                        <i class="fas fa-shield-alt"></i>
-                        SECURE
-                    </span>
-                </div>
-                
-                <div class="card-icon-wrapper">
-                    <div class="card-icon-circle">
-                        <div class="icon-bg"></div>
-                        <i class="fas fa-fingerprint"></i>
-                    </div>
-                </div>
-                
-                <h3 class="card-title">Biometric Security</h3>
-                
-                <!-- Security shield animation -->
-                <div class="security-shield">
-                    <div class="shield-ring"></div>
-                    <div class="shield-ring"></div>
-                    <div class="shield-ring"></div>
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                
-                <p class="card-description">
-                    <span class="highlight">Military-grade encryption</span> with Face ID & Touch ID. 
-                    Your money is safer than Fort Knox.
-                </p>
-                
-                <div class="security-methods">
-                    <div class="method">
-                        <i class="fas fa-face-smile"></i>
-                        <span>Face ID</span>
-                    </div>
-                    <div class="method">
-                        <i class="fas fa-fingerprint"></i>
-                        <span>Touch ID</span>
-                    </div>
-                    <div class="method">
-                        <i class="fas fa-mobile"></i>
-                        <span>2FA</span>
-                    </div>
-                </div>
-                
-                <div class="card-footer">
-                    <a href="profile.html" class="card-link">
-                        <span>Enable now</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- PREMIUM CTA SECTION -->
-        <div class="premium-cta">
-            <div class="cta-backdrop"></div>
-            
-            <div class="cta-content">
-                <div class="cta-left">
-                    <div class="cta-users">
-                        <div class="cta-avatar-stack">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User">
-                            <div class="avatar-count">2M+</div>
+                        
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon-circle">
+                                <div class="icon-bg"></div>
+                                <i class="fas fa-bolt"></i>
+                            </div>
                         </div>
-                        <div class="cta-users-text">
-                            <span class="users-number">2 million+</span>
-                            <span class="users-label">happy customers</span>
+                        
+                        <h3 class="card-title">Instant Transfers</h3>
+                        
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">0.1<span class="stat-unit">s</span></span>
+                                <span class="stat-label">Transfer time</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-value">100<span class="stat-unit">+</span></span>
+                                <span class="stat-label">Countries</span>
+                            </div>
+                        </div>
+                        
+                        <p class="card-description">
+                            Send money anywhere in seconds with <span class="highlight">zero fees</span>. 
+                            24/7 availability, because your money never sleeps.
+                        </p>
+                        
+                        <div class="card-footer">
+                            <a href="transfer.html" class="card-link">
+                                <span>Try it now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            
+                            <div class="card-users">
+                                <div class="user-icons">
+                                    <i class="fas fa-circle"></i>
+                                    <i class="fas fa-circle"></i>
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                                <span>+2k daily</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-particle p1"></div>
+                        <div class="card-particle p2"></div>
+                    </div>
+                    
+                    <!-- CARD 2 - Smart Analytics -->
+                    <div class="feature-card premium-card">
+                        <div class="card-glow"></div>
+                        
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon-circle">
+                                <div class="icon-bg"></div>
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                        </div>
+                        
+                        <h3 class="card-title">Smart Analytics</h3>
+                        
+                        <div class="chart-container">
+                            <div class="chart-bar" style="height: 40px;"></div>
+                            <div class="chart-bar" style="height: 65px;"></div>
+                            <div class="chart-bar" style="height: 25px;"></div>
+                            <div class="chart-bar" style="height: 80px;"></div>
+                            <div class="chart-bar" style="height: 55px;"></div>
+                            <div class="chart-bar" style="height: 35px;"></div>
+                            <div class="chart-bar" style="height: 70px;"></div>
+                        </div>
+                        
+                        <p class="card-description">
+                            AI-powered insights into your spending. Know exactly where your money goes with 
+                            <span class="highlight">automatic categorization</span>.
+                        </p>
+                        
+                        <div class="insight-tags">
+                            <span class="tag">🍕 Food</span>
+                            <span class="tag">🚗 Transport</span>
+                            <span class="tag">🛒 Shopping</span>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="dashboard.html" class="card-link">
+                                <span>View analytics</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                     
-                    <h4 class="cta-title">
-                        Join the banking <br>revolution today
-                    </h4>
+                    <!-- CARD 3 - Biometric Security -->
+                    <div class="feature-card premium-card">
+                        <div class="card-glow"></div>
+                        
+                        <div class="card-badge-right">
+                            <span class="badge-secure">
+                                <i class="fas fa-shield-alt"></i>
+                                SECURE
+                            </span>
+                        </div>
+                        
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon-circle">
+                                <div class="icon-bg"></div>
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                        </div>
+                        
+                        <h3 class="card-title">Biometric Security</h3>
+                        
+                        <div class="security-shield">
+                            <div class="shield-ring"></div>
+                            <div class="shield-ring"></div>
+                            <div class="shield-ring"></div>
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        
+                        <p class="card-description">
+                            <span class="highlight">Military-grade encryption</span> with Face ID & Touch ID. 
+                            Your money is safer than Fort Knox.
+                        </p>
+                        
+                        <div class="security-methods">
+                            <div class="method">
+                                <i class="fas fa-face-smile"></i>
+                                <span>Face ID</span>
+                            </div>
+                            <div class="method">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>Touch ID</span>
+                            </div>
+                            <div class="method">
+                                <i class="fas fa-mobile"></i>
+                                <span>2FA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="profile.html" class="card-link">
+                                <span>Enable now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="cta-right">
-                    <a href="login.html" class="cta-button">
-                        <span>Get Started</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <p class="cta-note">No credit card required • Free forever</p>
+                <!-- PREMIUM CTA SECTION -->
+                <div class="premium-cta">
+                    <div class="cta-backdrop"></div>
+                    
+                    <div class="cta-content">
+                        <div class="cta-left">
+                            <div class="cta-users">
+                                <div class="cta-avatar-stack">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Happy customer" loading="lazy">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Happy customer" loading="lazy">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Happy customer" loading="lazy">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Happy customer" loading="lazy">
+                                    <div class="avatar-count">2M+</div>
+                                </div>
+                                <div class="cta-users-text">
+                                    <span class="users-number">2 million+</span>
+                                    <span class="users-label">happy customers</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="cta-title">
+                                Join the banking <br>revolution today
+                            </h4>
+                        </div>
+                        
+                        <div class="cta-right">
+                            <a href="register.html" class="cta-button">
+                                <span>Get Started</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <p class="cta-note">No credit card required • Free forever</p>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-emoji emoji1">🚀</div>
+                    <div class="floating-emoji emoji2">💸</div>
+                    <div class="floating-emoji emoji3">🔒</div>
+                    <div class="floating-emoji emoji4">⚡</div>
                 </div>
             </div>
-            
-            <!-- Floating emojis for fun -->
-            <div class="floating-emoji emoji1">🚀</div>
-            <div class="floating-emoji emoji2">💸</div>
-            <div class="floating-emoji emoji3">🔒</div>
-            <div class="floating-emoji emoji4">⚡</div>
-        </div>
-    </div>
-</section>
+        </section>
 
-
-
+        <!-- Audience Section - New section showing the four audiences -->
+        <section class="audience-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        Built for <span class="gradient-text">everyone</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        Whether you're an individual, business owner, parent, or investor, 
+                        we have the perfect solution for you.
+                    </p>
+                </div>
+                
+                <div class="audience-grid">
+                    <a href="personal/index.html" class="audience-card">
+                        <div class="audience-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 class="audience-title">Personal</h3>
+                        <p class="audience-desc">Banking for individuals and families</p>
+                        <span class="audience-link">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    
+                    <a href="business/index.html" class="audience-card">
+                        <div class="audience-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="audience-title">Business</h3>
+                        <p class="audience-desc">Solutions for companies of all sizes</p>
+                        <span class="audience-link">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    
+                    <a href="kids-teens/index.html" class="audience-card">
+                        <div class="audience-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3 class="audience-title">Kids & Teens</h3>
+                        <p class="audience-desc">Teaching financial literacy early</p>
+                        <span class="audience-link">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    
+                    <a href="company/index.html" class="audience-card">
+                        <div class="audience-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="audience-title">Company</h3>
+                        <p class="audience-desc">Learn about NexusBank</p>
+                        <span class="audience-link">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-main">
                 <div class="footer-brand">
+                    <a href="index.html" class="nav-brand">
+                        Nexus<span class="accent">Bank</span>
+                    </a>
                     <p class="footer-tagline">
-                        Modern banking for the digital generation.
+                        Modern banking for the digital generation. Secure, fast, and beautiful.
                     </p>
+                    <div class="ssl-secure">
+                        <i class="fas fa-lock"></i>
+                        <span>SSL Secure Connection</span>
+                    </div>
                 </div>
                 
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4 class="footer-title">Product</h4>
-                        <a href="dashboard.html" class="footer-link">Dashboard</a>
-                        <a href="accounts.html" class="footer-link">Accounts</a>
-                        <a href="transfer.html" class="footer-link">Transfers</a>
-                        <a href="transactions.html" class="footer-link">Transactions</a>
+                        <h4 class="footer-title">Personal</h4>
+                        <a href="personal/accounts.html" class="footer-link">Accounts</a>
+                        <a href="personal/cards.html" class="footer-link">Cards</a>
+                        <a href="personal/savings.html" class="footer-link">Savings</a>
+                        <a href="investments/stocks.html" class="footer-link">Investments</a>
+                        <a href="crypto/crypto.html" class="footer-link">Crypto</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Business</h4>
+                        <a href="business/accounts.html" class="footer-link">Business Accounts</a>
+                        <a href="business/cards.html" class="footer-link">Corporate Cards</a>
+                        <a href="business/payments.html" class="footer-link">Accept Payments</a>
+                        <a href="business/apis.html" class="footer-link">APIs</a>
                     </div>
                     
                     <div class="footer-column">
                         <h4 class="footer-title">Company</h4>
-                        <a href="#" class="footer-link">About</a>
-                        <a href="#" class="footer-link">Careers</a>
-                        <a href="#" class="footer-link">Security</a>
-                        <a href="#" class="footer-link">Contact</a>
+                        <a href="company/about.html" class="footer-link">About Us</a>
+                        <a href="careers/index.html" class="footer-link">Careers</a>
+                        <a href="company/news.html" class="footer-link">News</a>
+                        <a href="investors/reports.html" class="footer-link">Investors</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Help</h4>
+                        <a href="help/centre.html" class="footer-link">Help Centre</a>
+                        <a href="help/contact.html" class="footer-link">Contact Us</a>
+                        <a href="security/how-we-protect.html" class="footer-link">Security</a>
+                        <a href="help/system-status.html" class="footer-link">System Status</a>
                     </div>
                     
                     <div class="footer-column">
                         <h4 class="footer-title">Legal</h4>
-                        <a href="#" class="footer-link">Privacy Policy</a>
-                        <a href="#" class="footer-link">Terms of Service</a>
-                        <a href="#" class="footer-link">Cookie Policy</a>
+                        <a href="legal/privacy.html" class="footer-link">Privacy Policy</a>
+                        <a href="legal/terms.html" class="footer-link">Terms of Service</a>
+                        <a href="legal/cookies.html" class="footer-link">Cookie Policy</a>
+                        <a href="legal/gdpr.html" class="footer-link">GDPR</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p class="copyright">© 2024 NexusBank. All rights reserved.</p>
+                <p class="copyright">© 2024 NexusBank. All rights reserved. Licensed by the FCA.</p>
                 <div class="footer-social">
-                    <a href="#" class="social-link">
+                    <a href="#" class="social-link" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" class="social-link" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="#" class="social-link" aria-label="GitHub">
                         <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navRow = document.querySelector('.nav-row');
             
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                navRow.classList.toggle('mobile-open');
-            });
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navRow.classList.toggle('mobile-open');
+                    const isExpanded = navRow.classList.contains('mobile-open');
+                    this.setAttribute('aria-expanded', isExpanded);
+                });
+            }
             
+            // Close mobile menu when clicking outside
             document.addEventListener('click', function(e) {
-                if (!navRow.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                if (navRow && !navRow.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                     navRow.classList.remove('mobile-open');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 }
             });
             
+            // Theme toggle
             const themeToggle = document.getElementById('themeToggle');
-            themeToggle.addEventListener('click', function() {
-                document.documentElement.classList.toggle('dark-theme');
-                document.body.classList.toggle('dark-theme');
-                const icon = this.querySelector('i');
-                const isDark = document.documentElement.classList.contains('dark-theme');
-                icon.classList.toggle('fa-moon', !isDark);
-                icon.classList.toggle('fa-sun', isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-theme');
+                    const icon = this.querySelector('i');
+                    const isDark = document.body.classList.contains('dark-theme');
+                    
+                    if (isDark) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                    
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                });
+            }
             
+            // Load saved theme
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark-theme');
                 document.body.classList.add('dark-theme');
-                const icon = themeToggle.querySelector('i');
-                icon.classList.replace('fa-moon', 'fa-sun');
+                const icon = themeToggle?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
             }
+            
+            // Mobile dropdown handling
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Only on mobile
+                    if (window.innerWidth <= 768) {
+                        const dropdown = this.closest('.nav-dropdown');
+                        
+                        // Close other dropdowns
+                        dropdownToggles.forEach(otherToggle => {
+                            const otherDropdown = otherToggle.closest('.nav-dropdown');
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('active');
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // Close dropdowns when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    if (!e.target.closest('.nav-dropdown')) {
+                        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                            dropdown.classList.remove('active');
+                        });
+                    }
+                }
+            });
         });
     </script>
 </body>

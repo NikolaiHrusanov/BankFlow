@@ -547,6 +547,20 @@
     }); // DOMContentLoaded
   })();
   </script>
-
+<script>
+    // Check URL parameter to open Register tab
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tab') === 'register') {
+            // Wait a tiny bit for the DOM to be fully ready
+            setTimeout(() => {
+                const registerBtn = document.getElementById('showRegisterBtn');
+                if (registerBtn) {
+                    registerBtn.click();
+                }
+            }, 100);
+        }
+    })();
+</script>
 </body>
 </html>
